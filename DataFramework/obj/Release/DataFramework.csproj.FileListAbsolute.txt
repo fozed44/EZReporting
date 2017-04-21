@@ -1,0 +1,10 @@
+C:\Projects\EZReporting\DataFramework\bin\Release\DataFramework.dll.config
+C:\Projects\EZReporting\DataFramework\bin\Release\DataFramework.dll
+C:\Projects\EZReporting\DataFramework\bin\Release\DataFramework.pdb
+C:\Projects\EZReporting\DataFramework\bin\Release\EntityFramework.dll
+C:\Projects\EZReporting\DataFramework\bin\Release\EntityFramework.SqlServer.dll
+C:\Projects\EZReporting\DataFramework\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Projects\EZReporting\DataFramework\bin\Release\EntityFramework.xml
+C:\Projects\EZReporting\DataFramework\bin\Release\EntityFramework.SqlServer.xml
+C:\Projects\EZReporting\DataFramework\obj\Release\DataFramework.dll
+C:\Projects\EZReporting\DataFramework\obj\Release\DataFramework.pdb

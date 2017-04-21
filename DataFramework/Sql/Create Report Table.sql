@@ -1,7 +1,28 @@
-﻿CREATE TABLE [dbo].[Report](
+﻿USE [EZReporting]
+GO
+
+/****** Object:  Table [dbo].[Report]    Script Date: 4/21/2017 8:56:02 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Report](
 	[pkID] [int] IDENTITY(1,1) NOT NULL,
 	[ReportName] [nvarchar](60) NOT NULL,
-	[ServerName] [nvarchar](60) NOT NULL,
-	[ProcName]   [nvarchar](60) NOT NULL,
-	CONSTRAINT [PK_Report] PRIMARY KEY(pkID) 
-)
+	[ProcName] [nvarchar](60) NOT NULL,
+	[DatabaseName] [nvarchar](60) NOT NULL,
+	[SchemaName] [nvarchar](60) NOT NULL,
+ CONSTRAINT [PK_Report] PRIMARY KEY CLUSTERED 
+(
+	[pkID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [U_ReportName] UNIQUE NONCLUSTERED 
+(
+	[ReportName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+

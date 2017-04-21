@@ -15,12 +15,13 @@ namespace DataFramework.Framework
     public partial class ReportOutputColumnCustomization
     {
         public int pkID { get; set; }
-        public int fkReport { get; set; }
         public int fkUser { get; set; }
-        public string ColumnName { get; set; }
         public int Position { get; set; }
         public int Flags { get; set; }
+        public string DisplayName { get; set; }
+        public int fkColumn { get; set; }
+        public string DisplayType { get; set; }
     
-        public virtual Report Report { get; set; }
+        public virtual ReportOutputColumn ReportOutputColumn { get; set; }
     }
 }

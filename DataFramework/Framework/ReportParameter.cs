@@ -16,9 +16,10 @@ namespace DataFramework.Framework
     {
         public int pkID { get; set; }
         public int fkReport { get; set; }
-        public string ColumnName { get; set; }
         public string DisplayName { get; set; }
         public int Flags { get; set; }
+        public string DBType { get; set; }
+        public string ParameterName { get; set; }
     
         public virtual Report Report { get; set; }
     }

@@ -1,0 +1,28 @@
+﻿@model WebServer.Models.HomeModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h2 class="text-center">EZReporting Data Helper</h2>
+<h5 class="text-center">Click a button below to create a new report or edit a current report.</h5>
+<div class="row text-center">
+    <a class="btn btn-default" href="~/CreateReport">Create</a>
+    <span>or</span>
+    <div style="display:inline-block;width:250px;vertical-align:bottom;">
+        <div class="input-group form-inline">
+            <select id="slctReports" class="form-control">
+                <option value="__NONE__">Select a Report...</option>
+                @foreach(var report in Model.Reports) {
+                    <option value="@report.ReportName">@report.ReportName</option>
+                }
+            </select>
+            <a id="btnEditReport" class="btn btn-default input-group-addon" data-target="@Url.Action("Index","EditReport")">Edit</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/Home.js" type="text/javascript"></script>
+}

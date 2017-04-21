@@ -4,15 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EZReportingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EZReportingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Report">
           <Key>
             <PropertyRef Name="pkID" />
           </Key>
           <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ReportName" Type="nvarchar" MaxLength="60" Nullable="false" />
-          <Property Name="ServerName" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="ProcName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="DatabaseName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="SchemaName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Renderer" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="ReportOutputColumn">
           <Key>
@@ -21,19 +23,20 @@
           <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fkReport" Type="int" Nullable="false" />
           <Property Name="ColumnName" Type="nvarchar" MaxLength="60" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="Flags" Type="int" Nullable="false" />
+          <Property Name="DBType" Type="nvarchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="ReportOutputColumnCustomization">
           <Key>
             <PropertyRef Name="pkID" />
           </Key>
           <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fkReport" Type="int" Nullable="false" />
           <Property Name="fkUser" Type="int" Nullable="false" />
-          <Property Name="ColumnName" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="Position" Type="int" Nullable="false" />
           <Property Name="Flags" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="60" />
+          <Property Name="fkColumn" Type="int" Nullable="false" />
+          <Property Name="DisplayType" Type="nvarchar" MaxLength="60" />
         </EntityType>
         <EntityType Name="ReportParameter">
           <Key>
@@ -41,9 +44,10 @@
           </Key>
           <Property Name="pkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fkReport" Type="int" Nullable="false" />
-          <Property Name="ColumnName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="ParameterName" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="Flags" Type="int" Nullable="false" />
+          <Property Name="DBType" Type="nvarchar" MaxLength="60" Nullable="false" />
         </EntityType>
         <Association Name="FK__ReportOut__fkRep__15502E78">
           <End Role="Report" Type="Self.Report" Multiplicity="1" />
@@ -53,18 +57,6 @@
               <PropertyRef Name="pkID" />
             </Principal>
             <Dependent Role="ReportOutputColumn">
-              <PropertyRef Name="fkReport" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ReportOut__fkRep__182C9B23">
-          <End Role="Report" Type="Self.Report" Multiplicity="1" />
-          <End Role="ReportOutputColumnCustomization" Type="Self.ReportOutputColumnCustomization" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Report">
-              <PropertyRef Name="pkID" />
-            </Principal>
-            <Dependent Role="ReportOutputColumnCustomization">
               <PropertyRef Name="fkReport" />
             </Dependent>
           </ReferentialConstraint>
@@ -81,6 +73,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ReportOutputColumnCustomization_ReportOutputColumn">
+          <End Role="ReportOutputColumn" Type="Self.ReportOutputColumn" Multiplicity="1" />
+          <End Role="ReportOutputColumnCustomization" Type="Self.ReportOutputColumnCustomization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportOutputColumn">
+              <PropertyRef Name="pkID" />
+            </Principal>
+            <Dependent Role="ReportOutputColumnCustomization">
+              <PropertyRef Name="fkColumn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EZReportingModelStoreContainer">
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportOutputColumn" EntityType="Self.ReportOutputColumn" Schema="dbo" store:Type="Tables" />
@@ -90,17 +94,16 @@
             <End Role="Report" EntitySet="Report" />
             <End Role="ReportOutputColumn" EntitySet="ReportOutputColumn" />
           </AssociationSet>
-          <AssociationSet Name="FK__ReportOut__fkRep__182C9B23" Association="Self.FK__ReportOut__fkRep__182C9B23">
-            <End Role="Report" EntitySet="Report" />
-            <End Role="ReportOutputColumnCustomization" EntitySet="ReportOutputColumnCustomization" />
-          </AssociationSet>
           <AssociationSet Name="FK__ReportPar__fkRep__1273C1CD" Association="Self.FK__ReportPar__fkRep__1273C1CD">
             <End Role="Report" EntitySet="Report" />
             <End Role="ReportParameter" EntitySet="ReportParameter" />
           </AssociationSet>
+          <AssociationSet Name="FK_ReportOutputColumnCustomization_ReportOutputColumn" Association="Self.FK_ReportOutputColumnCustomization_ReportOutputColumn">
+            <End Role="ReportOutputColumn" EntitySet="ReportOutputColumn" />
+            <End Role="ReportOutputColumnCustomization" EntitySet="ReportOutputColumnCustomization" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EZReportingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -110,11 +113,12 @@
           </Key>
           <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ReportName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ServerName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProcName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ReportOutputColumns" Relationship="Self.FK__ReportOut__fkRep__15502E78" FromRole="Report" ToRole="ReportOutputColumn" />
-          <NavigationProperty Name="ReportOutputColumnCustomizations" Relationship="Self.FK__ReportOut__fkRep__182C9B23" FromRole="Report" ToRole="ReportOutputColumnCustomization" />
           <NavigationProperty Name="ReportParameters" Relationship="Self.FK__ReportPar__fkRep__1273C1CD" FromRole="Report" ToRole="ReportParameter" />
+          <Property Name="DatabaseName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="SchemaName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Renderer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ReportOutputColumn">
           <Key>
@@ -123,21 +127,23 @@
           <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fkReport" Type="Int32" Nullable="false" />
           <Property Name="ColumnName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Flags" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Report" Relationship="Self.FK__ReportOut__fkRep__15502E78" FromRole="ReportOutputColumn" ToRole="Report" />
+          <Property Name="DBType" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReportOutputColumnCustomizations" Relationship="EZReportingModel.FK_ReportOutputColumnCustomization_ReportOutputColumn" FromRole="ReportOutputColumn" ToRole="ReportOutputColumnCustomization" />
         </EntityType>
         <EntityType Name="ReportOutputColumnCustomization">
           <Key>
             <PropertyRef Name="pkID" />
           </Key>
           <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fkReport" Type="Int32" Nullable="false" />
           <Property Name="fkUser" Type="Int32" Nullable="false" />
-          <Property Name="ColumnName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Position" Type="Int32" Nullable="false" />
           <Property Name="Flags" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Report" Relationship="Self.FK__ReportOut__fkRep__182C9B23" FromRole="ReportOutputColumnCustomization" ToRole="Report" />
+          <Property Name="DisplayName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="fkColumn" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ReportOutputColumn" Relationship="EZReportingModel.FK_ReportOutputColumnCustomization_ReportOutputColumn" FromRole="ReportOutputColumnCustomization" ToRole="ReportOutputColumn" />
+          <Property Name="DisplayType" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ReportParameter">
           <Key>
@@ -145,10 +151,11 @@
           </Key>
           <Property Name="pkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fkReport" Type="Int32" Nullable="false" />
-          <Property Name="ColumnName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Flags" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Report" Relationship="Self.FK__ReportPar__fkRep__1273C1CD" FromRole="ReportParameter" ToRole="Report" />
+          <Property Name="DBType" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="ParameterName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__ReportOut__fkRep__15502E78">
           <End Role="Report" Type="Self.Report" Multiplicity="1" />
@@ -158,18 +165,6 @@
               <PropertyRef Name="pkID" />
             </Principal>
             <Dependent Role="ReportOutputColumn">
-              <PropertyRef Name="fkReport" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ReportOut__fkRep__182C9B23">
-          <End Role="Report" Type="Self.Report" Multiplicity="1" />
-          <End Role="ReportOutputColumnCustomization" Type="Self.ReportOutputColumnCustomization" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Report">
-              <PropertyRef Name="pkID" />
-            </Principal>
-            <Dependent Role="ReportOutputColumnCustomization">
               <PropertyRef Name="fkReport" />
             </Dependent>
           </ReferentialConstraint>
@@ -195,15 +190,27 @@
             <End Role="Report" EntitySet="Reports" />
             <End Role="ReportOutputColumn" EntitySet="ReportOutputColumns" />
           </AssociationSet>
-          <AssociationSet Name="FK__ReportOut__fkRep__182C9B23" Association="Self.FK__ReportOut__fkRep__182C9B23">
-            <End Role="Report" EntitySet="Reports" />
-            <End Role="ReportOutputColumnCustomization" EntitySet="ReportOutputColumnCustomizations" />
-          </AssociationSet>
           <AssociationSet Name="FK__ReportPar__fkRep__1273C1CD" Association="Self.FK__ReportPar__fkRep__1273C1CD">
             <End Role="Report" EntitySet="Reports" />
             <End Role="ReportParameter" EntitySet="ReportParameters" />
           </AssociationSet>
+          <AssociationSet Name="FK_ReportOutputColumnCustomization_ReportOutputColumn" Association="EZReportingModel.FK_ReportOutputColumnCustomization_ReportOutputColumn">
+            <End Role="ReportOutputColumn" EntitySet="ReportOutputColumns" />
+            <End Role="ReportOutputColumnCustomization" EntitySet="ReportOutputColumnCustomizations" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_ReportOutputColumnCustomization_ReportOutputColumn">
+          <End Type="EZReportingModel.ReportOutputColumn" Role="ReportOutputColumn" Multiplicity="1" />
+          <End Type="EZReportingModel.ReportOutputColumnCustomization" Role="ReportOutputColumnCustomization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportOutputColumn">
+              <PropertyRef Name="pkID" />
+            </Principal>
+            <Dependent Role="ReportOutputColumnCustomization">
+              <PropertyRef Name="fkColumn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -213,9 +220,11 @@
           <EntitySetMapping Name="Reports">
             <EntityTypeMapping TypeName="EZReportingModel.Report">
               <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="Renderer" ColumnName="Renderer" />
+                <ScalarProperty Name="SchemaName" ColumnName="SchemaName" />
+                <ScalarProperty Name="DatabaseName" ColumnName="DatabaseName" />
                 <ScalarProperty Name="pkID" ColumnName="pkID" />
                 <ScalarProperty Name="ReportName" ColumnName="ReportName" />
-                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
                 <ScalarProperty Name="ProcName" ColumnName="ProcName" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -223,10 +232,10 @@
           <EntitySetMapping Name="ReportOutputColumns">
             <EntityTypeMapping TypeName="EZReportingModel.ReportOutputColumn">
               <MappingFragment StoreEntitySet="ReportOutputColumn">
+                <ScalarProperty Name="DBType" ColumnName="DBType" />
                 <ScalarProperty Name="pkID" ColumnName="pkID" />
                 <ScalarProperty Name="fkReport" ColumnName="fkReport" />
                 <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Flags" ColumnName="Flags" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -234,10 +243,11 @@
           <EntitySetMapping Name="ReportOutputColumnCustomizations">
             <EntityTypeMapping TypeName="EZReportingModel.ReportOutputColumnCustomization">
               <MappingFragment StoreEntitySet="ReportOutputColumnCustomization">
+                <ScalarProperty Name="DisplayType" ColumnName="DisplayType" />
+                <ScalarProperty Name="fkColumn" ColumnName="fkColumn" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="pkID" ColumnName="pkID" />
-                <ScalarProperty Name="fkReport" ColumnName="fkReport" />
                 <ScalarProperty Name="fkUser" ColumnName="fkUser" />
-                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Flags" ColumnName="Flags" />
               </MappingFragment>
@@ -246,9 +256,10 @@
           <EntitySetMapping Name="ReportParameters">
             <EntityTypeMapping TypeName="EZReportingModel.ReportParameter">
               <MappingFragment StoreEntitySet="ReportParameter">
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="DBType" ColumnName="DBType" />
                 <ScalarProperty Name="pkID" ColumnName="pkID" />
                 <ScalarProperty Name="fkReport" ColumnName="fkReport" />
-                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Flags" ColumnName="Flags" />
               </MappingFragment>

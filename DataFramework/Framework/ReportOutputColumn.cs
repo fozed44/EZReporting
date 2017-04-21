@@ -14,12 +14,20 @@ namespace DataFramework.Framework
     
     public partial class ReportOutputColumn
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ReportOutputColumn()
+        {
+            this.ReportOutputColumnCustomizations = new HashSet<ReportOutputColumnCustomization>();
+        }
+    
         public int pkID { get; set; }
         public int fkReport { get; set; }
         public string ColumnName { get; set; }
-        public string DisplayName { get; set; }
         public int Flags { get; set; }
+        public string DBType { get; set; }
     
         public virtual Report Report { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReportOutputColumnCustomization> ReportOutputColumnCustomizations { get; set; }
     }
 }

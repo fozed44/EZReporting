@@ -1,0 +1,25 @@
+﻿@model IEnumerable<EZReporting.Data.ReportParameter>
+
+
+<div class="row" id="ReportParameters">
+    <div class="col-xs-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter Name</th>
+                    <th>Display Name</th>
+                    <th>DBType</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var param in Model) {
+                    <tr>
+                        <td>@param.ParameterName</td>
+                        <td>@param.DisplayName</td>
+                        <td>@param.DBType</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

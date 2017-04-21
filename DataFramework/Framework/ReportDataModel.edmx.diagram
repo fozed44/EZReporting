@@ -6,12 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="ba6be7368e1f4dc1b546874642d34826" Name="Diagram1">
         <EntityTypeShape EntityType="EZReportingModel.Report" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EZReportingModel.ReportOutputColumn" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EZReportingModel.ReportOutputColumnCustomization" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EZReportingModel.ReportParameter" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EZReportingModel.ReportOutputColumn" Width="2.125" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EZReportingModel.ReportOutputColumnCustomization" Width="3.375" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EZReportingModel.ReportParameter" Width="3.375" PointX="3" PointY="7.25" IsExpanded="true" />
         <AssociationConnector Association="EZReportingModel.FK__ReportOut__fkRep__15502E78" ManuallyRouted="false" />
-        <AssociationConnector Association="EZReportingModel.FK__ReportOut__fkRep__182C9B23" ManuallyRouted="false" />
         <AssociationConnector Association="EZReportingModel.FK__ReportPar__fkRep__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="EZReportingModel.FK_ReportOutputColumnCustomization_ReportOutputColumn" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

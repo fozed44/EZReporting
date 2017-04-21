@@ -18,19 +18,18 @@ namespace DataFramework.Framework
         public Report()
         {
             this.ReportOutputColumns = new HashSet<ReportOutputColumn>();
-            this.ReportOutputColumnCustomizations = new HashSet<ReportOutputColumnCustomization>();
             this.ReportParameters = new HashSet<ReportParameter>();
         }
     
         public int pkID { get; set; }
         public string ReportName { get; set; }
-        public string ServerName { get; set; }
         public string ProcName { get; set; }
+        public string DatabaseName { get; set; }
+        public string SchemaName { get; set; }
+        public string Renderer { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReportOutputColumn> ReportOutputColumns { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReportOutputColumnCustomization> ReportOutputColumnCustomizations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReportParameter> ReportParameters { get; set; }
     }

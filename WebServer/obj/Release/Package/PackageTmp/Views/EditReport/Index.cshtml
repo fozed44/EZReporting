@@ -1,0 +1,43 @@
+﻿
+@model WebServer.Models.EditModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div id="EditReportContainer" class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h2>Editing Report</h2>
+                <h1>@Model.ReportName</h1>
+            </div>
+        </div>
+        <div class="row">
+             <div class="col-xs-12">
+                 <div class="panel-primary">
+                     <div class="panel-heading">Report Parameters</div>
+                     <div class="panel-body">
+                         @{
+                             Html.RenderPartial("_ParameterTable", Model.Parameters);
+                         }
+                     </div>
+                 </div>
+             </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel-primary">
+                    <div class="panel-heading">Report Columns</div>
+                    <div class="panel-body">
+                        @{
+                            Html.RenderPartial("_ParameterTable", Model.OutputColumns);
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
