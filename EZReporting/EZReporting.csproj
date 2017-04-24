@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ImplementationCategory.cs" />
     <Compile Include="Attributes\ImplementationDescriptorAttribute.cs" />
-    <Compile Include="Attributes\ImplementationLocator.cs" />
+    <Compile Include="Attributes\ImplementationEnumerator.cs" />
     <Compile Include="Data\Controllers\ReportDataController.cs" />
     <Compile Include="Data\Models\Report.cs" />
     <Compile Include="Data\Models\ReportOutputColumn.cs" />
@@ -63,6 +63,10 @@
     <Compile Include="Enumeration\EnumeratedInput.cs" />
     <Compile Include="Enumeration\EnumeratedOutput.cs" />
     <Compile Include="Enumeration\SqlEnumerator.cs" />
+    <Compile Include="Factory\ImplementationFactory.cs" />
+    <Compile Include="Interface\IConverter.cs" />
+    <Compile Include="Interface\IFormatter.cs" />
+    <Compile Include="Interface\IRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,15 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace EZReporting.Attributes {
-    public class ImplementationLocator {
+
+    /// <summary>
+    //++ ImplementationEnumerator
+    ///
+    //+  Purpose:
+    ///     Enumerates implementations that are decorated with an ImplementationDescriptorAttribute
+    ///     based on either a category or the interface the implementation implements.
+    /// </summary>
+    public class ImplementationEnumerator {
 
         #region Public
 

@@ -2,6 +2,15 @@
 
 namespace EZReporting.Attributes {
 
+    /// <summary>
+    //++ ImplementationDescriptorAttribute
+    ///
+    //+  Purpose:
+    ///     Used to decorate implementations of renderer, converter, and formatter implementations.
+    ///     The Category and Interface properties help the view factory determine which implementation
+    ///     of a particular interface to instantiate given a particular report. Also the WebServer 
+    ///     uses this attribute information when displaying renderer, formatter, or converter options.
+    /// </summary>
     [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     sealed class ImplementationDescriptorAttribute : Attribute {
 
