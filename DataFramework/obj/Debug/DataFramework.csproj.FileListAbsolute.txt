@@ -6,6 +6,5 @@ C:\Projects\EZReporting\DataFramework\bin\Debug\EntityFramework.SqlServer.dll
 C:\Projects\EZReporting\DataFramework\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Projects\EZReporting\DataFramework\bin\Debug\EntityFramework.xml
 C:\Projects\EZReporting\DataFramework\bin\Debug\EntityFramework.SqlServer.xml
-C:\Projects\EZReporting\DataFramework\obj\Debug\DataFramework.csprojResolveAssemblyReference.cache
 C:\Projects\EZReporting\DataFramework\obj\Debug\DataFramework.dll
 C:\Projects\EZReporting\DataFramework\obj\Debug\DataFramework.pdb

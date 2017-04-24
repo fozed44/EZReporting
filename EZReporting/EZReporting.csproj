@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ImplementationCategory.cs" />
+    <Compile Include="Attributes\ImplementationDescriptorAttribute.cs" />
+    <Compile Include="Attributes\ImplementationLocator.cs" />
     <Compile Include="Data\Controllers\ReportDataController.cs" />
     <Compile Include="Data\Models\Report.cs" />
     <Compile Include="Data\Models\ReportOutputColumn.cs" />
