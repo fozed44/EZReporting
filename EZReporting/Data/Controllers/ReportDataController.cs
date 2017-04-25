@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataFramework.Framework;
+using EZReporting.Enumeration;
 
 namespace EZReporting.Data {
 
@@ -11,6 +12,8 @@ namespace EZReporting.Data {
     ///     Methods used to CRUD report objects in EZReporting.dbo.Database
     /// </summary>
     public static class ReportDataController {
+
+        #region Public
 
         /// <summary>
         /// Test database.schema.procedure to see if a matching record exists.
@@ -115,6 +118,67 @@ namespace EZReporting.Data {
             foreach(var convert in result.Select(x => new Report(x)))
                 yield return convert;
         }
+
+        #endregion
+
+        #region Private
+
+            #region Insert
+
+        /// <summary>
+        /// Inserts default parameter data into EZReporting.dbo.ReportParameter.
+        /// </summary>
+        private static void InsertDefaultInputData(EZReportingEntities context, Report report) {
+            var defaults = SqlEnumerator.EnumerateStoredProcInputs(report.DatabaseName, report.SchemaName, report.ProcName);
+            foreach(var input in defaults) {
+                context.ReportParameters.Add(new DataFramework.Framework.ReportParameter {
+                    fkReport      = report.pkID,
+                    ParameterName = input.Name,
+                    DisplayName   = input.Name,
+                    DBType        = input.DataType,
+                    Flags         = 0
+                });
+            }
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Insert default output column data into EZReporting.dbo.ReportOutputColumn.
+        /// </summary>
+        private static void InsertDefaultOutputData(EZReportingEntities context, Report report) {
+            var defaults = SqlEnumerator.EnumerateStoredProcOutputs(report.DatabaseName, report.SchemaName, report.ProcName);
+            foreach(var column in defaults) {
+                context.ReportOutputColumns.Add(new DataFramework.Framework.ReportOutputColumn {
+                    fkReport   = report.pkID,
+                    ColumnName = column.Name,
+                    DBType     = column.Type,
+                    Flags      = 0
+                });
+            }
+            context.SaveChanges();
+        }
+
+            #endregion
+
+            #region Delete
+
+        private static void DeleteColumnData(EZReportingEntities context, Report report) {
+            var toDelete = context.ReportOutputColumns.Where(x => x.fkReport == report.pkID);
+            context.ReportOutputColumns.RemoveRange(toDelete);
+        }
+
+        private static void DeleteInputData(EZReportingEntities context, Report report) {
+            var toDelete = context.ReportParameters.Where(x => x.fkReport == report.pkID);
+            context.ReportParameters.RemoveRange(toDelete);
+        }
+
+        private static void DeleteCustomColumnData(EZReportingEntities context, Report report) {
+            var toDelete = context.ReportOutputColumnCustomizations.Where(x => x.fkColumn)
+        }
+
+            #endregion
+
+        #endregion
 
     }
 }

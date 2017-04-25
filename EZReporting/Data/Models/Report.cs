@@ -17,16 +17,16 @@ namespace EZReporting.Data {
             pkID         = report.pkID;
             ReportName   = report.ReportName;
             ProcName     = report.ProcName;
-            DatabaseName = report.DatabaseName;
             SchemaName   = report.SchemaName;
+            DatabaseName = report.DatabaseName;
             Renderer     = report.Renderer;
         }
 
         public int    pkID         { get; set; }
         public string ReportName   { get; set; }
         public string ProcName     { get; set; }
-        public string DatabaseName { get; set; }
         public string SchemaName   { get; set; }
+        public string DatabaseName { get; set; }
         public string Renderer     { get; set; }
 
         public DataFramework.Framework.Report ToFramework() {
@@ -34,8 +34,8 @@ namespace EZReporting.Data {
                 pkID         = this.pkID,
                 ReportName   = this.ReportName,
                 ProcName     = this.ProcName,
-                DatabaseName = this.DatabaseName,
                 SchemaName   = this.SchemaName,
+                DatabaseName = this.DatabaseName,
                 Renderer     = this.Renderer
             };
         }

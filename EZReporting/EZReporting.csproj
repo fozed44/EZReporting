@@ -53,6 +53,8 @@
     <Compile Include="Attributes\ImplementationCategory.cs" />
     <Compile Include="Attributes\ImplementationDescriptorAttribute.cs" />
     <Compile Include="Attributes\ImplementationEnumerator.cs" />
+    <Compile Include="Data\Controllers\ColumnCustomizationDataController.cs" />
+    <Compile Include="Data\Controllers\ColumnDataController.cs" />
     <Compile Include="Data\Controllers\ReportDataController.cs" />
     <Compile Include="Data\Models\Report.cs" />
     <Compile Include="Data\Models\ReportOutputColumn.cs" />
@@ -64,7 +66,11 @@
     <Compile Include="Enumeration\EnumeratedOutput.cs" />
     <Compile Include="Enumeration\SqlEnumerator.cs" />
     <Compile Include="Factory\ImplementationFactory.cs" />
+    <Compile Include="Implementation\Default\DefaultDataProvider.cs" />
+    <Compile Include="Implementation\Default\DefaultFormatter.cs" />
+    <Compile Include="Implementation\Default\DefaultRenderer.cs" />
     <Compile Include="Interface\IConverter.cs" />
+    <Compile Include="Interface\IDataProvider.cs" />
     <Compile Include="Interface\IFormatter.cs" />
     <Compile Include="Interface\IRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +85,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

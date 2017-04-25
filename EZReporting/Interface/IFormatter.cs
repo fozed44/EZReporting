@@ -11,7 +11,6 @@ namespace EZReporting.Interface {
     /// </summary>
     public interface IFormatter {
         Type DataType { get; }
-        T Format<T>(object input);
-        object Format(object input);
+        string Format(object input);
     }
 }

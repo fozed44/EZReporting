@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="EZReportingModelStoreContainer" CdmEntityContainer="EZReportingEntities">
-    <EntitySetMapping Name="Reports">
-      <EntityTypeMapping TypeName="EZReportingModel.Report">
-        <MappingFragment StoreEntitySet="Report">
-          <ScalarProperty Name="Renderer" ColumnName="Renderer" />
-          <ScalarProperty Name="SchemaName" ColumnName="SchemaName" />
-          <ScalarProperty Name="DatabaseName" ColumnName="DatabaseName" />
-          <ScalarProperty Name="pkID" ColumnName="pkID" />
-          <ScalarProperty Name="ReportName" ColumnName="ReportName" />
-          <ScalarProperty Name="ProcName" ColumnName="ProcName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ReportOutputColumns">
       <EntityTypeMapping TypeName="EZReportingModel.ReportOutputColumn">
         <MappingFragment StoreEntitySet="ReportOutputColumn">
@@ -46,6 +34,18 @@
           <ScalarProperty Name="fkReport" ColumnName="fkReport" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="Flags" ColumnName="Flags" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="EZReportingModel.Report">
+        <MappingFragment StoreEntitySet="Report">
+          <ScalarProperty Name="Renderer" ColumnName="Renderer" />
+          <ScalarProperty Name="SchemaName" ColumnName="SchemaName" />
+          <ScalarProperty Name="DatabaseName" ColumnName="DatabaseName" />
+          <ScalarProperty Name="ProcName" ColumnName="ProcName" />
+          <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+          <ScalarProperty Name="pkID" ColumnName="pkID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -25,9 +25,9 @@ namespace DataFramework.Framework
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<ReportOutputColumn> ReportOutputColumns { get; set; }
         public virtual DbSet<ReportOutputColumnCustomization> ReportOutputColumnCustomizations { get; set; }
         public virtual DbSet<ReportParameter> ReportParameters { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
     }
 }

@@ -61,6 +61,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="tControllers\tColumnDataController.cs" />
     <Compile Include="tControllers\tReportDataController.cs" />
     <Compile Include="tDefault\tDefaultGenerator.cs" />
     <Compile Include="tEnumeration\tSqlEnumerator.cs" />

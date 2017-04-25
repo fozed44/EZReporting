@@ -26,8 +26,8 @@ namespace DataFramework.Framework
         public int Flags { get; set; }
         public string DBType { get; set; }
     
-        public virtual Report Report { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReportOutputColumnCustomization> ReportOutputColumnCustomizations { get; set; }
+        public virtual Report Report { get; set; }
     }
 }
