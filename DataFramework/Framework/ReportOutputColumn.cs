@@ -25,6 +25,10 @@ namespace DataFramework.Framework
         public string ColumnName { get; set; }
         public int Flags { get; set; }
         public string DBType { get; set; }
+        public string Formatter { get; set; }
+        public string Converter { get; set; }
+        public Nullable<int> FormatFlags { get; set; }
+        public Nullable<int> ConvertFlags { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReportOutputColumnCustomization> ReportOutputColumnCustomizations { get; set; }

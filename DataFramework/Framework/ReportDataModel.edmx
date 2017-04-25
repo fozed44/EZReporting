@@ -25,6 +25,10 @@
           <Property Name="ColumnName" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="Flags" Type="int" Nullable="false" />
           <Property Name="DBType" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Formatter" Type="nvarchar" MaxLength="60" />
+          <Property Name="Converter" Type="nvarchar" MaxLength="60" />
+          <Property Name="FormatFlags" Type="int" />
+          <Property Name="ConvertFlags" Type="int" />
         </EntityType>
         <EntityType Name="ReportOutputColumnCustomization">
           <Key>
@@ -118,6 +122,10 @@
           <Property Name="DBType" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ReportOutputColumnCustomizations" Relationship="EZReportingModel.FK_ReportOutputColumnCustomization_ReportOutputColumn" FromRole="ReportOutputColumn" ToRole="ReportOutputColumnCustomization" />
           <NavigationProperty Name="Report" Relationship="EZReportingModel.FK__ReportOut__fkRep__15502E78" FromRole="ReportOutputColumn" ToRole="Report" />
+          <Property Name="Formatter" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Converter" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="FormatFlags" Type="Int32" />
+          <Property Name="ConvertFlags" Type="Int32" />
         </EntityType>
         <EntityType Name="ReportOutputColumnCustomization">
           <Key>
@@ -220,6 +228,10 @@
           <EntitySetMapping Name="ReportOutputColumns">
             <EntityTypeMapping TypeName="EZReportingModel.ReportOutputColumn">
               <MappingFragment StoreEntitySet="ReportOutputColumn">
+                <ScalarProperty Name="ConvertFlags" ColumnName="ConvertFlags" />
+                <ScalarProperty Name="FormatFlags" ColumnName="FormatFlags" />
+                <ScalarProperty Name="Converter" ColumnName="Converter" />
+                <ScalarProperty Name="Formatter" ColumnName="Formatter" />
                 <ScalarProperty Name="DBType" ColumnName="DBType" />
                 <ScalarProperty Name="pkID" ColumnName="pkID" />
                 <ScalarProperty Name="fkReport" ColumnName="fkReport" />

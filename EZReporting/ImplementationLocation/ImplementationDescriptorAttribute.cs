@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EZReporting.Attributes {
+namespace EZReporting.Location {
 
     /// <summary>
     //++ ImplementationDescriptorAttribute

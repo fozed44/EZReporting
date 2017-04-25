@@ -1,6 +1,6 @@
-﻿
-using System;
+﻿using System;
 using EZReporting.Interface;
+using EZReporting.Location;
 
 namespace EZReporting.Implementation {
 
@@ -10,6 +10,7 @@ namespace EZReporting.Implementation {
     //+  Purpose:
     ///     The DefaultDataProvider is the default implementation of IDataProvider.
     /// </summary>
+    [ImplementationDescriptor(category: ImplementationCategory.DataProvider, @interface: typeof(IDataProvider))]
     public class DefaultDataProvider : IDataProvider {
 
         #region IDataProvider

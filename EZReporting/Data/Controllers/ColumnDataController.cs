@@ -28,7 +28,7 @@ namespace EZReporting.Data {
             using(var context = new EZReportingEntities()) {
                 return (from column in context.ReportOutputColumns
                         where column.fkReport == report.pkID
-                        select column).Select(x => new EZReporting.Data.ReportOutputColumn());
+                        select column).ToList().Select(x => new EZReporting.Data.ReportOutputColumn(x));
             }
         }
 

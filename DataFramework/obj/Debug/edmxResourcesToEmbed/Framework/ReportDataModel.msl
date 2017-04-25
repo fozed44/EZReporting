@@ -4,6 +4,10 @@
     <EntitySetMapping Name="ReportOutputColumns">
       <EntityTypeMapping TypeName="EZReportingModel.ReportOutputColumn">
         <MappingFragment StoreEntitySet="ReportOutputColumn">
+          <ScalarProperty Name="ConvertFlags" ColumnName="ConvertFlags" />
+          <ScalarProperty Name="FormatFlags" ColumnName="FormatFlags" />
+          <ScalarProperty Name="Converter" ColumnName="Converter" />
+          <ScalarProperty Name="Formatter" ColumnName="Formatter" />
           <ScalarProperty Name="DBType" ColumnName="DBType" />
           <ScalarProperty Name="pkID" ColumnName="pkID" />
           <ScalarProperty Name="fkReport" ColumnName="fkReport" />

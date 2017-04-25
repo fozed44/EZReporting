@@ -6,16 +6,15 @@ namespace tEZReporting.tControllers {
     [TestClass]
     public class tReportDataController {
 
-        private string _testReportName = "TestReport";
-        private string _testDatabaseName = "TestDatabase";
-        private string _testSchemaName = "TestSchema";
-        private string _testProcName = "TestProc";
+        private const string _testReportName   = "TestReport";
+        private const string _testDatabaseName = "OnlineRisk";
+        private const string _testSchemaName   = "dbo";
+        private const string _testProcName     = "RiskReport";
 
-        [TestInitialize]
-        public void tInitialize() {
+        [ClassInitialize]
+        public static void tInitialize(TestContext c) {
             ReportDataController.Delete(_testReportName);
         }
-
 
         [TestMethod]
         public void tExits_FailA() {
@@ -24,13 +23,14 @@ namespace tEZReporting.tControllers {
         }
 
         [TestMethod]
-        public void tExists_FailB() {
-            var result = ReportDataController.Exists(_testDatabaseName, _testSchemaName, _testProcName);
-            Assert.IsFalse(result);
+        public void tCreate() {
+            CreateTestReport();
+            var result = ReportDataController.Exists(_testReportName);
+            Assert.IsTrue(result);
+            ReportDataController.Delete(_testReportName);
         }
 
-        [TestMethod]
-        public void tCreate() {
+        private void CreateTestReport() {
             var report = new Report {
                 DatabaseName = _testDatabaseName,
                 SchemaName   = _testSchemaName,
@@ -38,9 +38,6 @@ namespace tEZReporting.tControllers {
                 ReportName   = _testReportName
             };
             ReportDataController.Create(report);
-
-            var result = ReportDataController.Exists(_testReportName);
-            Assert.IsTrue(result);
         }
     }
 }

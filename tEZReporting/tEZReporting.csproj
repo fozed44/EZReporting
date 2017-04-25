@@ -61,11 +61,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="tAttributes\tImplementationEnumerator.cs" />
     <Compile Include="tControllers\tColumnDataController.cs" />
+    <Compile Include="tControllers\tParameterDataController.cs" />
     <Compile Include="tControllers\tReportDataController.cs" />
-    <Compile Include="tDefault\tDefaultGenerator.cs" />
     <Compile Include="tEnumeration\tSqlEnumerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tFactory\tImplementationFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EZReporting\EZReporting.csproj">

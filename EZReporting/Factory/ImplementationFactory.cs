@@ -1,10 +1,12 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using EZReporting.Data;
 using EZReporting.Enumeration;
 using EZReporting.Implementation;
 using EZReporting.Interface;
+using EZReporting.Location;
 
 namespace EZReporting.Factory {
 
@@ -29,46 +31,58 @@ namespace EZReporting.Factory {
         }
 
         public static IRenderer GetRenderer(Report report) {
-            if(string.IsNullOrEmpty(report.Renderer)
-            || report.Renderer == "DefaultRenderer") {
-                return Activator.CreateInstance<DefaultRenderer>();
-            }
-            throw new ArgumentException(
-               $"No renderer of type {report.Renderer} could be created (Report ID: {report.pkID})."
-            );
+            return ImplementationEnumerator.Locate<IRenderer>(report.Renderer);
         }
 
         public static IFormatter GetFormatter(Report report, int columnIndex) {
-            return (IFormatter)Activator.CreateInstance(GetFormatterForColumn(report, columnIndex));
+            var columns = ColumnDataController.GetColumns(report);
+            return GetFormatterForColumn(columns, columnIndex);
         }
 
         public static IEnumerable<IFormatter> GetFormatters(Report report) {
-            var columns = ColumnDataController.GetColumns(report);
-            var result  = new List<IFormatter>();
-            foreach(var column in columns) {
-                column.
-            }
+            return ColumnDataController
+                    .GetColumns(report)
+                    .Select(x => ImplementationEnumerator.Locate<IFormatter>(x.Formatter));
         }
 
         public static IConverter GetConverter(Report report, int columnIndex) {
-            return (IConverter)Activator.CreateInstance(GetConverterForColumn(report, columnIndex));
+            var columns = ColumnDataController.GetColumns(report);
+            return GetConverterForColumn(columns, columnIndex);
         }
 
         public static IEnumerable<IConverter> GetConverters(Report report) {
-
+            return ColumnDataController
+                    .GetColumns(report)
+                    .Select(x => ImplementationEnumerator.Locate<IConverter>(x.Converter));
         }
 
         #endregion
 
         #region Private
 
-        private static Type GetFormatterForColumn(Report report, int columnIndex) {
-
+        private static IFormatter GetFormatterForColumn(IEnumerable<ReportOutputColumn> columns, int columnIndex) {
+            if(columnIndex < 0 || columnIndex >= columns.Count())
+                throw new ArgumentException($"columnIndex ({columnIndex}) is out of range.");
+            var column = columns.ElementAt(columnIndex);
+            return ImplementationEnumerator.Locate<IFormatter>(column.Formatter);
         }
 
-        private static Type GetConverterForColumn(Report report, int columnIndex) {
-
+        private static IConverter GetConverterForColumn(IEnumerable<ReportOutputColumn> columns, int columnIndex) {
+            if(columnIndex < 0 || columnIndex >= columns.Count())
+                throw new ArgumentException($"columnIndex ({columnIndex}) is out of range.");
+            var column = columns.ElementAt(columnIndex);
+            return ImplementationEnumerator.Locate<IConverter>(column.Converter);
         }
+
+        private static ReportOutputColumnCustomization GetCustomization(ReportOutputColumn forColumn) {
+            using(var context = new DataFramework.Framework.EZReportingEntities()) {
+                var columnCustomization = (from entity in context.ReportOutputColumnCustomizations
+                                           where entity.fkColumn == forColumn.pkID
+                                           select entity).FirstOrDefault();
+                if(columnCustomization == null) return null;
+                return new ReportOutputColumnCustomization(columnCustomization);
+            }
+        }        
 
         #endregion
     }

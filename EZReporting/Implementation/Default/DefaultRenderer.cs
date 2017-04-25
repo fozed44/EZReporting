@@ -1,7 +1,7 @@
 ﻿using System;
-using EZReporting.Attributes;
 using EZReporting.Data;
 using EZReporting.Interface;
+using EZReporting.Location;
 
 namespace EZReporting.Implementation {
 

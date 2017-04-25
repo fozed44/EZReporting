@@ -11,6 +11,10 @@
     <Property Name="DBType" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ReportOutputColumnCustomizations" Relationship="EZReportingModel.FK_ReportOutputColumnCustomization_ReportOutputColumn" FromRole="ReportOutputColumn" ToRole="ReportOutputColumnCustomization" />
     <NavigationProperty Name="Report" Relationship="EZReportingModel.FK__ReportOut__fkRep__15502E78" FromRole="ReportOutputColumn" ToRole="Report" />
+    <Property Name="Formatter" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Converter" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="FormatFlags" Type="Int32" />
+    <Property Name="ConvertFlags" Type="Int32" />
   </EntityType>
   <EntityType Name="ReportOutputColumnCustomization">
     <Key>

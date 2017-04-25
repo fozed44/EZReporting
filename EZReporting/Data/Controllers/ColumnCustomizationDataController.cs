@@ -2,7 +2,7 @@
 using System.Linq;
 using DataFramework.Framework;
 
-namespace EZReporting.Data.Controllers {
+namespace EZReporting.Data {
 
     /// <summary>
     //++ ColumnCustomizationDataController

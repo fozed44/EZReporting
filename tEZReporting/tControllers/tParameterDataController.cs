@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using EZReporting.Data;
+﻿using EZReporting.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace tEZReporting.tControllers {
 
     [TestClass]
-    public class tColumnDataController {
+    public class tParameterDataController {
 
         private static string _tReportName = "__ColumnDataControllerTest";
 
@@ -18,12 +18,12 @@ namespace tEZReporting.tControllers {
         [ClassCleanup]
         public static void tCleanup() {
             DeleteTestReport();
-        }       
+        }
 
         [TestMethod]
-        public void tGetColumnData() {
+        public void tGetParameters() {
             var report = ReportDataController.Get(_tReportName);
-            var test  = ColumnDataController.GetColumns(report);
+            var test = ParameterDataController.GetParameters(report);
             Assert.IsNotNull(test);
             Assert.IsTrue(test.Count() > 1);
         }
@@ -41,5 +41,6 @@ namespace tEZReporting.tControllers {
         private static void DeleteTestReport() {
             ReportDataController.Delete(_tReportName);
         }
+
     }
 }

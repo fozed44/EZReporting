@@ -48,8 +48,8 @@ namespace WebServer.Controllers
             var reportMetaData = EZReporting.Data.ReportDataController.Get(reportName);
 
             result.ReportName = reportMetaData.ReportName;
-            result.Parameters = EZReporting.Default.DefaultsGenerator.GenerateDefaultParameters(reportMetaData.ReportName);
-            result.OutputColumns = EZReporting.Default.DefaultsGenerator.GenerateDefaultOutputColumns(reportMetaData.ReportName);
+            result.Parameters = EZReporting.Data.ParameterDataController.GetParameters(reportMetaData);
+            result.OutputColumns = EZReporting.Data.ColumnDataController.GetColumns(reportMetaData);
 
             return result;
         }

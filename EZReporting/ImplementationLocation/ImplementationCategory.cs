@@ -1,5 +1,5 @@
 ﻿
-namespace EZReporting.Attributes {
+namespace EZReporting.Location {
 
     /// <summary>
     //++ ImplementationCategory

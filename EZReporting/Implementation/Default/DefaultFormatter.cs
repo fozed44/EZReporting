@@ -1,6 +1,6 @@
-﻿
-using System;
+﻿using System;
 using EZReporting.Interface;
+using EZReporting.Location;
 
 namespace EZReporting.Implementation {
 
@@ -10,6 +10,7 @@ namespace EZReporting.Implementation {
     //+  Purpose:
     ///     Default implementation of IFormatter.
     /// </summary>
+    [ImplementationDescriptor(category: ImplementationCategory.Formatter, @interface: typeof(IFormatter))]
     public class DefaultFormatter : IFormatter {
 
         #region IFormatter
