@@ -1,12 +1,12 @@
+C:\Projects\EZReporting\EZReporting\bin\Debug\EZReporting.dll.config
 C:\Projects\EZReporting\EZReporting\bin\Debug\EZReporting.dll
 C:\Projects\EZReporting\EZReporting\bin\Debug\EZReporting.pdb
-C:\Projects\EZReporting\EZReporting\obj\Debug\EZReporting.csprojResolveAssemblyReference.cache
-C:\Projects\EZReporting\EZReporting\obj\Debug\EZReporting.dll
-C:\Projects\EZReporting\EZReporting\obj\Debug\EZReporting.pdb
-C:\Projects\EZReporting\EZReporting\bin\Debug\EZReporting.dll.config
 C:\Projects\EZReporting\EZReporting\bin\Debug\DataFramework.dll
 C:\Projects\EZReporting\EZReporting\bin\Debug\EntityFramework.dll
 C:\Projects\EZReporting\EZReporting\bin\Debug\EntityFramework.SqlServer.dll
 C:\Projects\EZReporting\EZReporting\bin\Debug\DataFramework.pdb
 C:\Projects\EZReporting\EZReporting\bin\Debug\EntityFramework.xml
 C:\Projects\EZReporting\EZReporting\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projects\EZReporting\EZReporting\obj\Debug\EZReporting.csprojResolveAssemblyReference.cache
+C:\Projects\EZReporting\EZReporting\obj\Debug\EZReporting.dll
+C:\Projects\EZReporting\EZReporting\obj\Debug\EZReporting.pdb

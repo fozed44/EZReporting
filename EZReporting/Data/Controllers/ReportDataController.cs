@@ -97,13 +97,10 @@ namespace EZReporting.Data {
         /// An IEnumeralbe of all of the reports in EZreporting.dbo.Report.
         /// </returns>
         public static IEnumerable<Report> GetAll() {
-            List<DataFramework.Framework.Report> result;
             using(var context = new EZReportingEntities()) {
-                result = (from entity in context.Reports
-                              select entity).ToList();
+                return (from entity in context.Reports
+                        select entity).ToList().Select(x => new Data.Report(x));
             }
-            foreach(var convert in result.Select(x => new Report(x)))
-                yield return convert;
         }
 
         #endregion
@@ -136,14 +133,14 @@ namespace EZReporting.Data {
             var defaults = SqlEnumerator.EnumerateStoredProcOutputs(report.DatabaseName, report.SchemaName, report.ProcName);
             foreach(var column in defaults) {
                 context.ReportOutputColumns.Add(new DataFramework.Framework.ReportOutputColumn {
-                    fkReport     = report.pkID,
-                    ColumnName   = column.Name,
-                    Formatter    = null,
-                    Converter    = null,
-                    FormatFlags  = null,
+                    fkReport   = report.pkID,
+                    ColumnName = column.Name,
+                    Formatter  = null,
+                    Converter  = null,
+                    FormatFlags = null,
                     ConvertFlags = null,
-                    DBType       = column.Type,
-                    Flags        = 0
+                    DBType     = column.Type,
+                    Flags      = 0
                 });
             }
             context.SaveChanges();
@@ -153,16 +150,26 @@ namespace EZReporting.Data {
 
             #region Delete
 
+        /// <summary>
+        /// Remove all column data from EZReporting.dbo.ReportOutputColumn for the specified report.
+        /// </summary>
         private static void DeleteColumnData(EZReportingEntities context, Report report) {
             var toDelete = context.ReportOutputColumns.Where(x => x.fkReport == report.pkID);
             context.ReportOutputColumns.RemoveRange(toDelete);
         }
 
+        /// <summary>
+        /// Remove all parameter data from EZReporting.dbo.Parameter for the specified report.
+        /// </summary>
         private static void DeleteInputData(EZReportingEntities context, Report report) {
             var toDelete = context.ReportParameters.Where(x => x.fkReport == report.pkID);
             context.ReportParameters.RemoveRange(toDelete);
         }
 
+        /// <summary>
+        /// Remove all column customizations from EZReporting.dbo.ReportOutputColumnCustomization
+        /// for the specified report.
+        /// </summary>
         private static void DeleteCustomColumnData(EZReportingEntities context, Report report) {
             var columns = context.ReportOutputColumns.Where(x => x.fkReport == report.pkID);
             var toDelete = new List<DataFramework.Framework.ReportOutputColumnCustomization>();

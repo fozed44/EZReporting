@@ -20,6 +20,10 @@
     <Property Name="ColumnName" Type="nvarchar" MaxLength="60" Nullable="false" />
     <Property Name="Flags" Type="int" Nullable="false" />
     <Property Name="DBType" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="Formatter" Type="nvarchar" MaxLength="60" />
+    <Property Name="Converter" Type="nvarchar" MaxLength="60" />
+    <Property Name="FormatFlags" Type="int" />
+    <Property Name="ConvertFlags" Type="int" />
   </EntityType>
   <EntityType Name="ReportOutputColumnCustomization">
     <Key>
