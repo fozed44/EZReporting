@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using EZReporting.Data;
+using EZDataFramework.Framework;
 using EZReporting.Enumeration;
 using WebServer.Models;
 

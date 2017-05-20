@@ -1,4 +1,4 @@
-﻿using EZReporting.Data;
+﻿using EZDataFramework.Framework;
 
 namespace EZReporting.Interface {
 

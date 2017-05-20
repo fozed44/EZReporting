@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataFramework.Framework;
+using EZDataFramework.Framework;
 
 namespace EZReporting.Data {
 
@@ -12,13 +12,13 @@ namespace EZReporting.Data {
     /// </summary>
     public static class ColumnCustomizationDataController {
 
-        public static IEnumerable<ReportOutputColumnCustomization> GetColumns(Report report) {
+        public static List<ReportColumnCustomization> GetColumns(Report report) {
             using(var context = new EZReportingEntities()) {
-                return (from column in context.ReportOutputColumns
-                        join columnCustomization in context.ReportOutputColumnCustomizations
-                        on column.pkID equals columnCustomization.fkColumn
+                return (from column in context.Columns
+                        join columnCustomization in context.ColumnCustomizations
+                        on column.pkID equals columnCustomization.fkReportColumn
                         where column.fkReport == report.pkID
-                        select columnCustomization).Select(x => new EZReporting.Data.ReportOutputColumnCustomization(x));
+                        select columnCustomization).ToList();
             }
         }
 

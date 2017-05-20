@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AF2AD707-95C4-4491-A25F-67A32E1F7560}</ProjectGuid>
+    <ProjectGuid>{F64A7844-2BE9-4D27-991C-BBB37A050FF7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EZReporting</RootNamespace>
-    <AssemblyName>EZReporting</AssemblyName>
+    <RootNamespace>EZDataFramework</RootNamespace>
+    <AssemblyName>EZDataFramework</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,8 +40,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,37 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Controllers\ParameterDataController.cs" />
-    <Compile Include="ImplementationLocation\ImplementationCategory.cs" />
-    <Compile Include="ImplementationLocation\ImplementationDescriptorAttribute.cs" />
-    <Compile Include="ImplementationLocation\ImplementationEnumerator.cs" />
-    <Compile Include="Data\Controllers\ColumnCustomizationDataController.cs" />
-    <Compile Include="Data\Controllers\ColumnDataController.cs" />
-    <Compile Include="Data\Controllers\ReportDataController.cs" />
-    <Compile Include="Default\Defaults.cs" />
-    <Compile Include="Enumeration\EnumeratedInput.cs" />
-    <Compile Include="Enumeration\EnumeratedOutput.cs" />
-    <Compile Include="Enumeration\SqlEnumerator.cs" />
-    <Compile Include="Factory\ImplementationFactory.cs" />
-    <Compile Include="Implementation\Default\DefaultConverter.cs" />
-    <Compile Include="Implementation\Default\DefaultDataProvider.cs" />
-    <Compile Include="Implementation\Default\DefaultFormatter.cs" />
-    <Compile Include="Implementation\Default\DefaultRenderer.cs" />
-    <Compile Include="Interface\IConverter.cs" />
-    <Compile Include="Interface\IDataProvider.cs" />
-    <Compile Include="Interface\IFormatter.cs" />
-    <Compile Include="Interface\IRenderer.cs" />
+    <Compile Include="EZReportingEntities.cs" />
+    <Compile Include="Framework\Report.cs" />
+    <Compile Include="Framework\ReportColumn.cs" />
+    <Compile Include="Framework\ReportColumnCustomization.cs" />
+    <Compile Include="Framework\ReportParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EZDataFramework\EZDataFramework.csproj">
-      <Project>{f64a7844-2be9-4d27-991c-bbb37a050ff7}</Project>
-      <Name>EZDataFramework</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

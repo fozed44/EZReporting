@@ -2,18 +2,18 @@
 namespace EZReporting.Data {
 
     /// <summary>
-    //++ ReportOutputColumn
+    //++ ReportColumn
     ///
     //+  Purpose:
-    ///     EZReporting.Data.ReportOuputColumn is a byte for byte equivalent to DataFramework.Framework.ReportOutputColum.
+    ///     EZReporting.Data.ReportOuputColumn is a byte for byte equivalent to EZDataFramework.Framework.ReportOutputColum.
     ///     The type is needed so that consumers of the EZReporting assembly do not need a dependency
-    ///     on the DataFramework assembly.
+    ///     on the EZDataFramework assembly.
     /// </summary>
-    public class ReportOutputColumn {
+    public class ReportColumn {
 
-        public ReportOutputColumn() { }
+        public ReportColumn() { }
         
-        public ReportOutputColumn(DataFramework.Framework.ReportOutputColumn c) {
+        public ReportColumn(EZDataFramework.Framework.ReportColumn c) {
             pkID         = c.pkID;
             fkReport     = c.fkReport;
             ColumnName   = c.ColumnName;
@@ -35,8 +35,8 @@ namespace EZReporting.Data {
         public int?   FormatFlags  { get; set; }
         public int?   ConvertFlags { get; set; }
 
-        public DataFramework.Framework.ReportOutputColumn ToFramework() {
-            return new DataFramework.Framework.ReportOutputColumn {
+        public EZDataFramework.Framework.ReportColumn ToFramework() {
+            return new EZDataFramework.Framework.ReportColumn {
                 pkID         = this.pkID,
                 fkReport     = this.fkReport,
                 ColumnName   = this.ColumnName,

@@ -1,14 +1,14 @@
 ﻿using EZReporting.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using EZDataFramework.Framework;
+using tEZReporting.Helpers;
 
 namespace tEZReporting.tControllers {
 
     [TestClass]
     public class tParameterDataController {
-
-        private static string _tReportName = "__ColumnDataControllerTest";
-
+        
         [ClassInitialize]
         public static void tInitialize(TestContext c) {
             DeleteTestReport();
@@ -22,7 +22,7 @@ namespace tEZReporting.tControllers {
 
         [TestMethod]
         public void tGetParameters() {
-            var report = ReportDataController.Get(_tReportName);
+            var report = ReportDataController.Get(TestMetadata.ReportName);
             var test = ParameterDataController.GetParameters(report);
             Assert.IsNotNull(test);
             Assert.IsTrue(test.Count() > 1);
@@ -30,16 +30,16 @@ namespace tEZReporting.tControllers {
 
         private static void CreateTestReport() {
             ReportDataController.Create(new Report {
-                ReportName   = _tReportName,
-                DatabaseName = "OnlineRisk",
-                SchemaName   = "dbo",
-                ProcName     = "RiskReport",
+                ReportName   = TestMetadata.ReportName,
+                DatabaseName = TestMetadata.DatabaseName,
+                SchemaName   = TestMetadata.SchemaName,
+                ProcName     = TestMetadata.ProcName,
                 Renderer     = "Default"
             });
         }
 
         private static void DeleteTestReport() {
-            ReportDataController.Delete(_tReportName);
+            ReportDataController.Delete(TestMetadata.ReportName);
         }
 
     }

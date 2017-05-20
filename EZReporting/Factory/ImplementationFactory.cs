@@ -1,7 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EZDataFramework.Framework;
 using EZReporting.Data;
 using EZReporting.Enumeration;
 using EZReporting.Implementation;
@@ -60,27 +60,27 @@ namespace EZReporting.Factory {
 
         #region Private
 
-        private static IFormatter GetFormatterForColumn(IEnumerable<ReportOutputColumn> columns, int columnIndex) {
+        private static IFormatter GetFormatterForColumn(IEnumerable<ReportColumn> columns, int columnIndex) {
             if(columnIndex < 0 || columnIndex >= columns.Count())
                 throw new ArgumentException($"columnIndex ({columnIndex}) is out of range.");
             var column = columns.ElementAt(columnIndex);
             return ImplementationEnumerator.Locate<IFormatter>(column.Formatter);
         }
 
-        private static IConverter GetConverterForColumn(IEnumerable<ReportOutputColumn> columns, int columnIndex) {
+        private static IConverter GetConverterForColumn(IEnumerable<ReportColumn> columns, int columnIndex) {
             if(columnIndex < 0 || columnIndex >= columns.Count())
                 throw new ArgumentException($"columnIndex ({columnIndex}) is out of range.");
             var column = columns.ElementAt(columnIndex);
             return ImplementationEnumerator.Locate<IConverter>(column.Converter);
         }
 
-        private static ReportOutputColumnCustomization GetCustomization(ReportOutputColumn forColumn) {
-            using(var context = new DataFramework.Framework.EZReportingEntities()) {
-                var columnCustomization = (from entity in context.ReportOutputColumnCustomizations
-                                           where entity.fkColumn == forColumn.pkID
+        private static ReportColumnCustomization GetCustomization(ReportColumn forColumn) {
+            using(var context = new EZDataFramework.Framework.EZReportingEntities()) {
+                var columnCustomization = (from entity in context.ColumnCustomizations
+                                           where entity.fkReportColumn == forColumn.pkID
                                            select entity).FirstOrDefault();
                 if(columnCustomization == null) return null;
-                return new ReportOutputColumnCustomization(columnCustomization);
+                return columnCustomization;
             }
         }        
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using EZReporting.Data;
+using EZDataFramework.Framework;
 using EZReporting.Interface;
 using EZReporting.Location;
 

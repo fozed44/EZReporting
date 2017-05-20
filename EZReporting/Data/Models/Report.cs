@@ -5,15 +5,15 @@ namespace EZReporting.Data {
     //++ Report
     ///
     //+  Purpose:
-    ///     EZReporting.Data.Report is a byte for byte equivalent to DataFramework.Framework.Report.
+    ///     EZReporting.Data.Report is a byte for byte equivalent to EZDataFramework.Framework.Report.
     ///     The type is needed so that consumers of the EZReporting assembly do not need a dependency
-    ///     on the DataFramework assembly.
+    ///     on the EZDataFramework assembly.
     /// </summary>
     public class Report {
 
         public Report() { }
 
-        public Report(DataFramework.Framework.Report report) {
+        public Report(EZDataFramework.Framework.Report report) {
             pkID         = report.pkID;
             ReportName   = report.ReportName;
             ProcName     = report.ProcName;
@@ -29,8 +29,8 @@ namespace EZReporting.Data {
         public string DatabaseName { get; set; }
         public string Renderer     { get; set; }
 
-        public DataFramework.Framework.Report ToFramework() {
-            return new DataFramework.Framework.Report {
+        public EZDataFramework.Framework.Report ToFramework() {
+            return new EZDataFramework.Framework.Report {
                 pkID         = this.pkID,
                 ReportName   = this.ReportName,
                 ProcName     = this.ProcName,

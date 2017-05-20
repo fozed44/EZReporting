@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using EZReporting.Data;
 using WebServer.Models;
 
 namespace WebServer.Controllers
@@ -45,11 +42,11 @@ namespace WebServer.Controllers
 
         private EditModel GetEditModel(string reportName) {
             var result = new EditModel();
-            var reportMetaData = EZReporting.Data.ReportDataController.Get(reportName);
+            var reportMetaData = ReportDataController.Get(reportName);
 
             result.ReportName = reportMetaData.ReportName;
-            result.Parameters = EZReporting.Data.ParameterDataController.GetParameters(reportMetaData);
-            result.OutputColumns = EZReporting.Data.ColumnDataController.GetColumns(reportMetaData);
+            result.Parameters = ParameterDataController.GetParameters(reportMetaData);
+            result.OutputColumns = ColumnDataController.GetColumns(reportMetaData);
 
             return result;
         }

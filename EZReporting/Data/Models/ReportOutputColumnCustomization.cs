@@ -2,21 +2,21 @@
 namespace EZReporting.Data {
 
     /// <summary>
-    //++ ReportOutputColumnCustomization
+    //++ ReportColumnCustomization
     ///
     //+  Purpose:
-    ///     EZReporting.Data.ReportOutputColumnCustomization is a byte for byte equivalent to 
-    ///     DataFramework.Framework.ReortOutputColumnCustomization.
+    ///     EZReporting.Data.ReportColumnCustomization is a byte for byte equivalent to 
+    ///     EZDataFramework.Framework.ReortOutputColumnCustomization.
     ///     The type is needed so that consumers of the EZReporting assembly do not need a dependency
-    ///     on the DataFramework assembly.
+    ///     on the EZDataFramework assembly.
     /// </summary>
-    public class ReportOutputColumnCustomization {
+    public class ReportColumnCustomization {
 
-        public ReportOutputColumnCustomization() { }
+        public ReportColumnCustomization() { }
 
-        public ReportOutputColumnCustomization(DataFramework.Framework.ReportOutputColumnCustomization c) {
+        public ReportColumnCustomization(EZDataFramework.Framework.ReportColumnCustomization c) {
             pkID        = c.pkID;
-            fkUser      = c.fkUser;
+            fkUser      = c.User;
             fkColumn    = c.fkColumn;
             Position    = c.Position;
             DisplayName = c.DisplayName;
@@ -31,8 +31,8 @@ namespace EZReporting.Data {
         public int    fkColumn    { get; set; }
         public string DisplayType { get; set; }
 
-        public DataFramework.Framework.ReportOutputColumnCustomization ToFramework() {
-            return new DataFramework.Framework.ReportOutputColumnCustomization {
+        public EZDataFramework.Framework.ReportColumnCustomization ToFramework() {
+            return new EZDataFramework.Framework.ReportColumnCustomization {
                 pkID        = this.pkID,
                 fkUser      = this.fkUser,
                 fkColumn    = this.fkColumn,

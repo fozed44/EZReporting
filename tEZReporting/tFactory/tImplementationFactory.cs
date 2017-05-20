@@ -1,19 +1,16 @@
 ﻿using System.Linq;
+using EZDataFramework.Framework;
 using EZReporting.Data;
 using EZReporting.Factory;
 using EZReporting.Implementation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using tEZReporting.Helpers;
 
 namespace tEZReporting.tFactory {
 
     [TestClass]
     public class tImplementationFactory {
-
-        private static string _tReport   = "__ImplementationFactoryTest";
-        private static string _tDatabase = "OnlineRisk";
-        private static string _tSchema   = "dbo";
-        private static string _tProc     = "RiskReport";
-
+        
         [ClassInitialize]
         public static void tInitialize(TestContext c) {
             DeleteTestReport();
@@ -27,28 +24,28 @@ namespace tEZReporting.tFactory {
 
         [TestMethod]
         public void tGetDataProvider() {
-            var report = ReportDataController.Get(_tReport);
+            var report = ReportDataController.Get(TestMetadata.ReportName);
             var result = ImplementationFactory.GetDataProvider(report);
             Assert.AreEqual(typeof(DefaultDataProvider), result.GetType());
         }
 
         [TestMethod]
         public void tGetRenderer() {
-            var report = ReportDataController.Get(_tReport);
+            var report = ReportDataController.Get(TestMetadata.ReportName);
             var result = ImplementationFactory.GetRenderer(report);
             Assert.AreEqual(typeof(DefaultRenderer), result.GetType());
         }
 
         [TestMethod]
         public void tGetFormatter() {
-            var report = ReportDataController.Get(_tReport);
+            var report = ReportDataController.Get(TestMetadata.ReportName);
             var result = ImplementationFactory.GetFormatter(report, 0);
             Assert.AreEqual(typeof(DefaultFormatter), result.GetType());
         }
 
         [TestMethod]
         public void tGetFormatters() {
-            var report = ReportDataController.Get(_tReport);
+            var report = ReportDataController.Get(TestMetadata.ReportName);
             var reportOutputColumns = ColumnDataController.GetColumns(report);
             var result = ImplementationFactory.GetFormatters(report);
             Assert.IsTrue(result.Count() == reportOutputColumns.Count());
@@ -56,15 +53,15 @@ namespace tEZReporting.tFactory {
 
         private static void CreateTestReport() {
             ReportDataController.Create(new Report {
-                ReportName   = _tReport,
-                DatabaseName = _tDatabase,
-                SchemaName   = _tSchema,
-                ProcName     = _tProc
+                ReportName   = TestMetadata.ReportName,
+                DatabaseName = TestMetadata.DatabaseName,
+                SchemaName   = TestMetadata.SchemaName,
+                ProcName     = TestMetadata.ProcName
             });
         }
 
         private static void DeleteTestReport() {
-            ReportDataController.Delete(_tReport);
+            ReportDataController.Delete(TestMetadata.ReportName);
         }
 
     }

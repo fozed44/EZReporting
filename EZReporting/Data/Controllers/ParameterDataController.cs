@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DataFramework.Framework;
+using EZDataFramework.Framework;
 using System.Linq;
 
 namespace EZReporting.Data {
@@ -22,11 +22,11 @@ namespace EZReporting.Data {
         /// <returns>
         /// An enumeration containing the parameter data for the specified report.
         /// </returns>
-        public static IEnumerable<ReportParameter> GetParameters(Report report) {
+        public static List<ReportParameter> GetParameters(Report report) {
             using(var context = new EZReportingEntities()) {
-                return (from entity in context.ReportParameters
+                return (from entity in context.Parameters
                         where entity.fkReport == report.pkID
-                        select entity).ToList().Select(x => new ReportParameter(x));
+                        select entity).ToList();
             }
         }
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using EZReporting.Data;
+using EZDataFramework.Framework;
 
 namespace WebServer.Models {
     public class HomeModel {

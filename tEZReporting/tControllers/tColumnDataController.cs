@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using EZDataFramework.Framework;
 using EZReporting.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

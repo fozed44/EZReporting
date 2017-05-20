@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DataFramework.Framework;
-using EZReporting.Default;
+using EZDataFramework.Framework;
 using EZReporting.Enumeration;
 
 namespace EZReporting.Data {
@@ -39,11 +38,10 @@ namespace EZReporting.Data {
         /// The report object filled with the report meta data.
         /// </param>
         public static void Create(Report report) {
-            var dataReport = report.ToFramework();
             using(var context = new EZReportingEntities()) {
-                context.Reports.Add(dataReport);
-                InsertDefaultInputData(context, dataReport);
-                InsertDefaultOutputData(context, dataReport);
+                context.Reports.Add(report);
+                InsertDefaultInputData(context, report);
+                InsertDefaultOutputData(context, report);
                 context.SaveChanges();
             }
         }
@@ -61,9 +59,9 @@ namespace EZReporting.Data {
                                select entity).FirstOrDefault();
                 if(current == null)
                     return;
-                DeleteCustomColumnData(context, new Report(current));
-                DeleteColumnData(context, new Report(current));
-                DeleteInputData(context, new Report(current));
+                DeleteCustomColumnData(context, current);
+                DeleteColumnData(context, current);
+                DeleteInputData(context, current);
                 context.Reports.Remove(current);
                 context.SaveChanges();
             }
@@ -86,7 +84,7 @@ namespace EZReporting.Data {
                 if(current == null)
                     return null;
 
-                return new Report(current);
+                return current;
             }
         }
 
@@ -99,7 +97,7 @@ namespace EZReporting.Data {
         public static IEnumerable<Report> GetAll() {
             using(var context = new EZReportingEntities()) {
                 return (from entity in context.Reports
-                        select entity).ToList().Select(x => new Data.Report(x));
+                        select entity).ToList();
             }
         }
 
@@ -112,14 +110,13 @@ namespace EZReporting.Data {
         /// <summary>
         /// Inserts default parameter data into EZReporting.dbo.ReportParameter.
         /// </summary>
-        private static void InsertDefaultInputData(EZReportingEntities context, DataFramework.Framework.Report report) {
+        private static void InsertDefaultInputData(EZReportingEntities context, Report report) {
             var defaults = SqlEnumerator.EnumerateStoredProcInputs(report.DatabaseName, report.SchemaName, report.ProcName);
             foreach(var input in defaults) {
-                context.ReportParameters.Add(new DataFramework.Framework.ReportParameter {
+                context.Parameters.Add(new EZDataFramework.Framework.ReportParameter {
                     fkReport      = report.pkID,
                     ParameterName = input.Name,
                     DisplayName   = input.Name,
-                    DBType        = input.DataType,
                     Flags         = 0
                 });
             }
@@ -127,18 +124,18 @@ namespace EZReporting.Data {
         }
 
         /// <summary>
-        /// Insert default output column data into EZReporting.dbo.ReportOutputColumn.
+        /// Insert default output column data into EZReporting.dbo.ReportColumn.
         /// </summary>
-        private static void InsertDefaultOutputData(EZReportingEntities context, DataFramework.Framework.Report report) {
+        private static void InsertDefaultOutputData(EZReportingEntities context, EZDataFramework.Framework.Report report) {
             var defaults = SqlEnumerator.EnumerateStoredProcOutputs(report.DatabaseName, report.SchemaName, report.ProcName);
             foreach(var column in defaults) {
-                context.ReportOutputColumns.Add(new DataFramework.Framework.ReportOutputColumn {
+                context.Columns.Add(new EZDataFramework.Framework.ReportColumn {
                     fkReport   = report.pkID,
                     ColumnName = column.Name,
                     Formatter  = null,
                     Converter  = null,
-                    FormatFlags = null,
-                    ConvertFlags = null,
+                    FormatFlags = 0,
+                    ConvertFlags = 0,
                     DBType     = column.Type,
                     Flags      = 0
                 });
@@ -151,37 +148,37 @@ namespace EZReporting.Data {
             #region Delete
 
         /// <summary>
-        /// Remove all column data from EZReporting.dbo.ReportOutputColumn for the specified report.
+        /// Remove all column data from EZReporting.dbo.ReportColumn for the specified report.
         /// </summary>
         private static void DeleteColumnData(EZReportingEntities context, Report report) {
-            var toDelete = context.ReportOutputColumns.Where(x => x.fkReport == report.pkID);
-            context.ReportOutputColumns.RemoveRange(toDelete);
+            var toDelete = context.Columns.Where(x => x.fkReport == report.pkID);
+            context.Columns.RemoveRange(toDelete);
         }
 
         /// <summary>
         /// Remove all parameter data from EZReporting.dbo.Parameter for the specified report.
         /// </summary>
         private static void DeleteInputData(EZReportingEntities context, Report report) {
-            var toDelete = context.ReportParameters.Where(x => x.fkReport == report.pkID);
-            context.ReportParameters.RemoveRange(toDelete);
+            var toDelete = context.Parameters.Where(x => x.fkReport == report.pkID);
+            context.Parameters.RemoveRange(toDelete);
         }
 
         /// <summary>
-        /// Remove all column customizations from EZReporting.dbo.ReportOutputColumnCustomization
+        /// Remove all column customizations from EZReporting.dbo.ReportColumnCustomization
         /// for the specified report.
         /// </summary>
         private static void DeleteCustomColumnData(EZReportingEntities context, Report report) {
-            var columns = context.ReportOutputColumns.Where(x => x.fkReport == report.pkID);
-            var toDelete = new List<DataFramework.Framework.ReportOutputColumnCustomization>();
+            var columns = context.Columns.Where(x => x.fkReport == report.pkID);
+            var toDelete = new List<EZDataFramework.Framework.ReportColumnCustomization>();
             foreach(var column in columns) {
                 var customization = 
-                    context.ReportOutputColumnCustomizations.Where(x => x.fkColumn == column.pkID)
+                    context.ColumnCustomizations.Where(x => x.fkReportColumn == column.pkID)
                     .FirstOrDefault();
                 if(customization != null)
                     toDelete.Add(customization);                
             }
             if(toDelete.Count > 0)
-                context.ReportOutputColumnCustomizations.RemoveRange(toDelete);
+                context.ColumnCustomizations.RemoveRange(toDelete);
         }
 
             #endregion
