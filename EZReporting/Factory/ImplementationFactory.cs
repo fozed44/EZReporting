@@ -85,5 +85,6 @@ namespace EZReporting.Factory {
         }        
 
         #endregion
+
     }
 }

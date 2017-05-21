@@ -51,6 +51,8 @@ namespace tEZReporting.tFactory {
             Assert.IsTrue(result.Count() == reportOutputColumns.Count());
         }
 
+        #region Private
+
         private static void CreateTestReport() {
             ReportDataController.Create(new Report {
                 ReportName   = TestMetadata.ReportName,
@@ -63,6 +65,8 @@ namespace tEZReporting.tFactory {
         private static void DeleteTestReport() {
             ReportDataController.Delete(TestMetadata.ReportName);
         }
+
+        #endregion
 
     }
 }

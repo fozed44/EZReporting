@@ -31,9 +31,9 @@ C:\Projects\EZReporting\tEZReporting\obj\Debug\tEZReporting.pdb
 C:\Projects\EZReporting\tEZReporting\bin\Debug\tEZReporting.dll.config
 C:\Projects\EZReporting\tEZReporting\bin\Debug\EZReporting.dll
 C:\Projects\EZReporting\tEZReporting\bin\Debug\EZReporting.pdb
-C:\Projects\EZReporting\tEZReporting\bin\Debug\DataFramework.dll
 C:\Projects\EZReporting\tEZReporting\bin\Debug\EntityFramework.dll
-C:\Projects\EZReporting\tEZReporting\bin\Debug\DataFramework.pdb
 C:\Projects\EZReporting\tEZReporting\bin\Debug\EntityFramework.xml
 C:\Projects\EZReporting\tEZReporting\bin\Debug\EntityFramework.SqlServer.dll
 C:\Projects\EZReporting\tEZReporting\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projects\EZReporting\tEZReporting\bin\Debug\EZDataFramework.dll
+C:\Projects\EZReporting\tEZReporting\bin\Debug\EZDataFramework.pdb

@@ -20,6 +20,7 @@ namespace EZReporting.Enumeration {
     ///     the methods will default to DBSERV using integrated security.
     /// </summary>
     public static class SqlEnumerator {
+
         #region Public
 
         /// <summary>
@@ -225,9 +226,12 @@ namespace EZReporting.Enumeration {
         }
 
         private static string GetOutputEnumerationQueryInputs(IEnumerable<EnumeratedInput> inputs) {
-            return string.Join(" = NULL, ", inputs.Select(x => x.Name)) + " = NULL";
+            return inputs.Count() > 0
+                        ? string.Join(" = NULL, ", inputs.Select(x => x.Name)) + " = NULL"
+                        : "";
         }
 
         #endregion
+
     }
 }

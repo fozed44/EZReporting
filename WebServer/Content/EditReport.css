@@ -1,0 +1,37 @@
+﻿
+#ColumnTable, #ParameterTable {
+    box-sizing:unset;
+    border: 5px solid lightgrey;
+    background: #555;
+    border-radius: 8px 8px;
+    overflow:hidden;
+}
+
+#ColumnTable thead tr, #ParameterTable thead tr {
+    background-color: #57F !important;
+    border-bottom: 2px solid black;
+}
+
+#ColumnTable thead tr th, #ParameterTable thead tr th {
+    text-align: center;
+    padding-right:15px;
+    padding-left:15px;
+    border-left: 2px dotted black;
+}
+
+#ColumnTable tbody tr td, #ParameterTable tbody tr td {
+    padding: 3px 15px;
+    border-left: 1px dotted grey;
+}
+
+
+#ColumnTable tr:nth-child(even), #ParameterTable tr:nth-child(even) {    
+    background-color: #999;
+}
+
+#ColumnTable tr:nth-child(odd), #ParameterTable tr:nth-child(odd) {    
+    background-color: #BBB;
+}
+
+#ColumnTable 
+

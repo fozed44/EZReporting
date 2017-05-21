@@ -8,6 +8,7 @@ namespace EZDataFramework.Framework {
         public string DisplayName   { get; set; }
         public int    Flags         { get; set; }
         public string ParameterName { get; set; }
+        public string DBType        { get; set; }
 
         [ForeignKey("Report")]
         public int fkReport { get; set; }

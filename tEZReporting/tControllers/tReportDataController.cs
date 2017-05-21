@@ -27,6 +27,8 @@ namespace tEZReporting.tControllers {
             ReportDataController.Delete(TestMetadata.ReportName);
         }
 
+        #region Private
+
         private void CreateTestReport() {
             var report = new Report {
                 DatabaseName = TestMetadata.DatabaseName,
@@ -36,5 +38,8 @@ namespace tEZReporting.tControllers {
             };
             ReportDataController.Create(report);
         }
+
+        #endregion
+
     }
 }

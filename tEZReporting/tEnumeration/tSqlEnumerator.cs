@@ -11,19 +11,19 @@ namespace tEZReporting.tWebServer {
         [TestMethod]
         public void tEnumerateDatabases() {
             var dbs = SqlEnumerator.EnumerateDatabases();
-            Assert.IsTrue(dbs.Count() > 10);
+            Assert.IsTrue(dbs.Count() > 0);
         }
 
         [TestMethod]
         public void tEnumerateTables() {
             var tables = SqlEnumerator.EnumerateTables(TestMetadata.DatabaseName);
-            Assert.IsTrue(tables.Count() > 10);
+            Assert.IsTrue(tables.Count() > 0);
         }
 
         [TestMethod]
         public void tEnumerateStoredProcs() {
             var procs = SqlEnumerator.EnumerateStoredProcs(TestMetadata.DatabaseName, TestMetadata.SchemaName);
-            Assert.IsTrue(procs.Count() > 5);
+            Assert.IsTrue(procs.Count() > 0);
         }
 
         [TestMethod]
@@ -37,8 +37,24 @@ namespace tEZReporting.tWebServer {
             var inputs = SqlEnumerator.EnumerateStoredProcInputs(
                 TestMetadata.DatabaseName, 
                 TestMetadata.SchemaName, 
-                TestMetadata.ReportName);
-            Assert.IsTrue(inputs.Count() > 2);
+                TestMetadata.ProcName);
+            Assert.IsTrue(inputs.Count() > 0);
+        }
+
+        /// <summary>
+        /// Test SqlEnumerate.EnumerateStoredProcInputs, make sure that all required parameter data
+        /// is enumerated.
+        /// </summary>
+        [TestMethod]
+        public void tCheckEnumeratedProcProperties() {
+            var inputs = SqlEnumerator.EnumerateStoredProcInputs(
+                TestMetadata.DatabaseName, 
+                TestMetadata.SchemaName, 
+                TestMetadata.ProcName);
+            foreach(var input in inputs) {
+                Assert.IsTrue(!string.IsNullOrEmpty(input.DataType));
+                Assert.IsTrue(!string.IsNullOrEmpty(input.Name));
+            }
         }
 
         [TestMethod]
@@ -46,8 +62,20 @@ namespace tEZReporting.tWebServer {
             var outputs = SqlEnumerator.EnumerateStoredProcOutputs(
                 TestMetadata.DatabaseName,
                 TestMetadata.SchemaName, 
-                TestMetadata.ReportName);
-            Assert.IsTrue(outputs.Count() > 2);
+                TestMetadata.ProcName);
+            Assert.IsTrue(outputs.Count() > 0);
+        }
+
+        [TestMethod]
+        public void tCheckEnumeratedProcOutputs() {
+            var outputs = SqlEnumerator.EnumerateStoredProcOutputs(
+                TestMetadata.DatabaseName,
+                TestMetadata.SchemaName,
+                TestMetadata.ProcName);
+            foreach(var output in outputs) {
+                Assert.IsTrue(!string.IsNullOrEmpty(output.Name));
+                Assert.IsTrue(!string.IsNullOrEmpty(output.Type));
+            }
         }
     }
 }

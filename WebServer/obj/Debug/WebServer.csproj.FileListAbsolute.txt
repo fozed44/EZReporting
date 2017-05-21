@@ -24,7 +24,6 @@ C:\Projects\EZReporting\WebServer\bin\System.Web.Razor.dll
 C:\Projects\EZReporting\WebServer\bin\System.Web.Webpages.Deployment.dll
 C:\Projects\EZReporting\WebServer\bin\System.Web.Webpages.dll
 C:\Projects\EZReporting\WebServer\bin\System.Web.Webpages.Razor.dll
-C:\Projects\EZReporting\WebServer\bin\DataFramework.dll
 C:\Projects\EZReporting\WebServer\bin\EZReporting.pdb
 C:\Projects\EZReporting\WebServer\bin\EntityFramework.xml
 C:\Projects\EZReporting\WebServer\bin\EntityFramework.SqlServer.xml
@@ -35,7 +34,8 @@ C:\Projects\EZReporting\WebServer\bin\System.Web.Webpages.Deployment.xml
 C:\Projects\EZReporting\WebServer\bin\System.Web.Webpages.Razor.xml
 C:\Projects\EZReporting\WebServer\bin\System.Web.Helpers.xml
 C:\Projects\EZReporting\WebServer\bin\System.Web.Mvc.xml
-C:\Projects\EZReporting\WebServer\bin\DataFramework.pdb
 C:\Projects\EZReporting\WebServer\obj\Debug\WebServer.csprojResolveAssemblyReference.cache
 C:\Projects\EZReporting\WebServer\obj\Debug\WebServer.dll
 C:\Projects\EZReporting\WebServer\obj\Debug\WebServer.pdb
+C:\Projects\EZReporting\WebServer\bin\EZDataFramework.dll
+C:\Projects\EZReporting\WebServer\bin\EZDataFramework.pdb

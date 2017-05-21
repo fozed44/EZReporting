@@ -117,6 +117,7 @@ namespace EZReporting.Data {
                     fkReport      = report.pkID,
                     ParameterName = input.Name,
                     DisplayName   = input.Name,
+                    DBType        = input.DataType,
                     Flags         = 0
                 });
             }

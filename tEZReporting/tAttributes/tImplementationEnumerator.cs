@@ -32,5 +32,6 @@ namespace tEZReporting.tAttributes {
             var result = ImplementationEnumerator.Locate(typeof(IConverter));
             Assert.IsTrue(result.Contains(typeof(DefaultConverter)));
         }
+
     }
 }
