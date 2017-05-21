@@ -1,0 +1,22 @@
+﻿@model EZDataFramework.Framework.Report
+
+<div class="row">
+    <div class="col-xs-3">
+        <span class="web-server-label">Report Name: </span>
+        <span class="web-server-value">@Model.ReportName</span>
+    </div>
+    <div class="col-xs-4">
+        <span class="web-server-label">Renderer: </span>
+        <span class="web-server-select">
+            @Html.DropDownList(
+                "RenderSelect",
+                EZReporting.Location.ImplementationEnumerator.Locate(typeof(EZReporting.Interface.IRenderer))
+                .Select(x => new SelectListItem { Text = x.Name, Value = x.Name }),
+                new { @class = "web-server-select" }
+            )
+        </span>
+    </div>
+    <div class="col-xs-5">
+        <button class="pull-right btn btn-primary">Update</button>
+    </div>
+</div>

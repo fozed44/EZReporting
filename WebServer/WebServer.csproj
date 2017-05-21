@@ -147,6 +147,8 @@
     <Content Include="Views\EditReport\_ParameterTable.cshtml" />
     <Content Include="Views\EditReport\_ColumnTable.cshtml" />
     <Content Include="Views\EditReport\_ColumnCustomizationTable.cshtml" />
+    <Content Include="Views\EditReport\_ReportControls.cshtml" />
+    <Content Include="Views\EditReport\_ReportOutput.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

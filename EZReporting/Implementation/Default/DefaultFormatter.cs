@@ -10,7 +10,11 @@ namespace EZReporting.Implementation {
     //+  Purpose:
     ///     Default implementation of IFormatter.
     /// </summary>
-    [ImplementationDescriptor(category: ImplementationCategory.Formatter, @interface: typeof(IFormatter))]
+    [FormatterDescriptor(
+        typeof(object),
+        typeof(object),
+        "Default"        
+    )]
     public class DefaultFormatter : IFormatter {
 
         #region IFormatter

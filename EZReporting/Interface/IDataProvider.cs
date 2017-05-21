@@ -15,5 +15,6 @@ namespace EZReporting.Interface {
         int ColumnCount { get; }
         Type GetColumnType(int column);
         object GetCell(int row, int column);
+
     }
 }

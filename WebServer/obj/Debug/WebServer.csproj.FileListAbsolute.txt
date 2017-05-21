@@ -39,3 +39,5 @@ C:\Projects\EZReporting\WebServer\obj\Debug\WebServer.dll
 C:\Projects\EZReporting\WebServer\obj\Debug\WebServer.pdb
 C:\Projects\EZReporting\WebServer\bin\EZDataFramework.dll
 C:\Projects\EZReporting\WebServer\bin\EZDataFramework.pdb
+C:\Projects\EZReporting\WebServer\bin\Verification.dll
+C:\Projects\EZReporting\WebServer\bin\SimpleLogging.dll

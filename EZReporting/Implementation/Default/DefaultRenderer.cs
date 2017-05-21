@@ -11,7 +11,11 @@ namespace EZReporting.Implementation {
     //+  Purpose:
     ///     Default implementation of IRenderer.
     /// </summary>
-    [ImplementationDescriptor(category: ImplementationCategory.Renderer, @interface: typeof(IRenderer))]
+    [ImplementationDescriptor(
+        category: ImplementationCategory.Renderer, 
+        @interface: typeof(IRenderer),
+        displayName: "Default"
+    )]
     public class DefaultRenderer : IRenderer {
 
         #region IRenderer

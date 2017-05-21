@@ -10,7 +10,11 @@ namespace EZReporting.Implementation {
     //+  Purpose:
     ///     The DefaultDataProvider is the default implementation of IDataProvider.
     /// </summary>
-    [ImplementationDescriptor(category: ImplementationCategory.DataProvider, @interface: typeof(IDataProvider))]
+    [ImplementationDescriptor(
+        category: ImplementationCategory.DataProvider, 
+        @interface: typeof(IDataProvider),
+        displayName: "Default"
+    )]
     public class DefaultDataProvider : IDataProvider {
 
         #region IDataProvider

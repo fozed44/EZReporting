@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using EZReporting.Data;
+using EZReporting.Interface;
+using EZReporting.Location;
 using WebServer.Models;
 
 namespace WebServer.Controllers
@@ -44,9 +46,12 @@ namespace WebServer.Controllers
             var result = new EditModel();
             var reportMetaData = ReportDataController.Get(reportName);
 
-            result.ReportName = reportMetaData.ReportName;
-            result.Parameters = ParameterDataController.GetParameters(reportMetaData);
-            result.OutputColumns = ColumnDataController.GetColumns(reportMetaData);
+            result.Report = reportMetaData;
+            result.Parameters          = ParameterDataController.GetParameters(reportMetaData);
+            result.OutputColumns       = ColumnDataController.GetColumns(reportMetaData);
+            result.ParameterConverters = ImplementationEnumerator.Locate(typeof(IConverter));
+            result.OutputConverters    = ImplementationEnumerator.Locate(typeof(IConverter));
+            result.Formatters          = ImplementationEnumerator.Locate(typeof(IFormatter));
 
             return result;
         }

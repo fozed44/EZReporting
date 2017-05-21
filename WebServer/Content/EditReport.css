@@ -33,5 +33,19 @@
     background-color: #BBB;
 }
 
-#ColumnTable 
+span.web-server-label {
+    font-family: 'Gentium Basic';
+}
+
+span.web-server-value {
+    font-weight: bold;
+}
+
+select.web-server-select {
+    border: 2px solid grey;
+    border-radius: 5px 5px;
+    padding: 0 5px;
+}
+
+
 

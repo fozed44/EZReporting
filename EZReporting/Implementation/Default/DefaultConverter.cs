@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using EZReporting.Interface;
 using EZReporting.Location;
 
@@ -10,7 +11,39 @@ namespace EZReporting.Implementation {
     //+  Purpose:
     ///     Default IConverter implementation. Does no actual conversion. (Converts object to object).
     /// </summary>
-    [ImplementationDescriptor(category: ImplementationCategory.Converter, @interface: typeof(IConverter))]
+    [ConverterDescriptor(
+        new DbType[] {
+            DbType.AnsiString,
+            DbType.AnsiStringFixedLength,
+            DbType.Binary,
+            DbType.Boolean,
+            DbType.Byte,
+            DbType.Currency,
+            DbType.Date,
+            DbType.DateTime,
+            DbType.DateTime2,
+            DbType.DateTimeOffset,
+            DbType.Decimal,
+            DbType.Double,
+            DbType.Guid,
+            DbType.Int16,
+            DbType.Int32,
+            DbType.Int64,
+            DbType.Object,
+            DbType.SByte,
+            DbType.Single,
+            DbType.String,
+            DbType.StringFixedLength,
+            DbType.Time,
+            DbType.UInt16,
+            DbType.UInt32,
+            DbType.UInt64,
+            DbType.VarNumeric,
+            DbType.Xml
+        },
+        typeof(object),
+        "Default"
+    )]
     public class DefaultConverter : IConverter {
         public Type Source {
             get { return typeof(object); }

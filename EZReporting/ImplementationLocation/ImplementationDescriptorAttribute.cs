@@ -12,17 +12,19 @@ namespace EZReporting.Location {
     ///     uses this attribute information when displaying renderer, formatter, or converter options.
     /// </summary>
     [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    sealed class ImplementationDescriptorAttribute : Attribute {
+    class ImplementationDescriptorAttribute : Attribute {
 
-        public ImplementationDescriptorAttribute(ImplementationCategory category, Type @interface) {
-            this._category  = category;
-            this._interface = @interface;
+        public ImplementationDescriptorAttribute(ImplementationCategory category, Type @interface, string displayName) {
+            this._category    = category;
+            this._interface   = @interface;
+            this._displayName = displayName;
         }
 
         private readonly ImplementationCategory _category;
         private readonly Type   _interface;
+        private readonly string _displayName;
 
         public ImplementationCategory Category => _category;
-        public Type Interface => _interface;
+        public Type Interface =>  _interface;        
     }
 }

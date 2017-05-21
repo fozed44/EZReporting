@@ -10,3 +10,6 @@ C:\Projects\EZReporting\EZReporting\obj\Debug\EZReporting.dll
 C:\Projects\EZReporting\EZReporting\obj\Debug\EZReporting.pdb
 C:\Projects\EZReporting\EZReporting\bin\Debug\EZDataFramework.dll
 C:\Projects\EZReporting\EZReporting\bin\Debug\EZDataFramework.pdb
+C:\Projects\EZReporting\EZReporting\bin\Debug\Common.dll
+C:\Projects\EZReporting\EZReporting\bin\Debug\SimpleLogging.dll
+C:\Projects\EZReporting\EZReporting\bin\Debug\Verification.dll
