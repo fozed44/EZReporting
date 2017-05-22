@@ -3,8 +3,9 @@ namespace tEZReporting.Helpers {
     public class TestMetadata {
 
         public const string DatabaseName = "ExclusiveSavers";
-        public const string SchemaName = "dbo";
-        public const string ReportName = "TestReport";
+        public const string SchemaName   = "dbo";
+        public const string ReportName   = "TestReport";
+        public const string ConnectionString = @"Data Source=X-PC\PRG112_2012; Integrated Security=True;";
 
         /// <summary>
         //! Note!!

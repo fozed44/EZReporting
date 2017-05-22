@@ -37,3 +37,5 @@ C:\Projects\EZReporting\tEZReporting\bin\Debug\EntityFramework.SqlServer.dll
 C:\Projects\EZReporting\tEZReporting\bin\Debug\EntityFramework.SqlServer.xml
 C:\Projects\EZReporting\tEZReporting\bin\Debug\EZDataFramework.dll
 C:\Projects\EZReporting\tEZReporting\bin\Debug\EZDataFramework.pdb
+C:\Projects\EZReporting\tEZReporting\bin\Debug\Verification.dll
+C:\Projects\EZReporting\tEZReporting\bin\Debug\SimpleLogging.dll

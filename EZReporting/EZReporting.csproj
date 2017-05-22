@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Builders\QueryBuilder.cs" />
     <Compile Include="Data\Controllers\ParameterDataController.cs" />
     <Compile Include="ImplementationLocation\ConverterDescriptor.cs" />
     <Compile Include="ImplementationLocation\FormatterDescriptor.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Enumeration\EnumeratedOutput.cs" />
     <Compile Include="Enumeration\SqlEnumerator.cs" />
     <Compile Include="Factory\ImplementationFactory.cs" />
+    <Compile Include="Implementation\Base Classes\DataProviderBase.cs" />
     <Compile Include="Implementation\Converters\StringToIntegerConverter.cs" />
     <Compile Include="Implementation\Default\DefaultConverter.cs" />
     <Compile Include="Implementation\Default\DefaultDataProvider.cs" />

@@ -135,10 +135,7 @@ namespace EZReporting.Data {
                     ColumnName = column.Name,
                     Formatter  = null,
                     Converter  = null,
-                    FormatFlags = 0,
-                    ConvertFlags = 0,
-                    DBType     = column.Type,
-                    Flags      = 0
+                    DBType     = column.Type
                 });
             }
             context.SaveChanges();

@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using EZDataFramework.Framework;
 
 namespace EZReporting.Interface {
 
@@ -13,8 +15,9 @@ namespace EZReporting.Interface {
     public interface IDataProvider {
         int RowCount    { get; }
         int ColumnCount { get; }
-        Type GetColumnType(int column);
-        object GetCell(int row, int column);
 
+        void   Load(Report report, Dictionary<string, string> @params);
+        Type   GetColumnType(int column);
+        object GetCell(int row, int column);
     }
 }

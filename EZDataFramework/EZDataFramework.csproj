@@ -52,10 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EZReportingEntities.cs" />
+    <Compile Include="Framework\Alignment.cs" />
+    <Compile Include="Framework\ConnectionString.cs" />
     <Compile Include="Framework\Report.cs" />
     <Compile Include="Framework\ReportColumn.cs" />
     <Compile Include="Framework\ReportColumnCustomization.cs" />
     <Compile Include="Framework\ReportParameter.cs" />
+    <Compile Include="Framework\TableStyle.cs" />
     <Compile Include="Migrations\201705200806141_InitialCreate.cs" />
     <Compile Include="Migrations\201705200806141_InitialCreate.Designer.cs">
       <DependentUpon>201705200806141_InitialCreate.cs</DependentUpon>
@@ -63,6 +66,10 @@
     <Compile Include="Migrations\201705202255424_AddDBTypeToReportParameter.cs" />
     <Compile Include="Migrations\201705202255424_AddDBTypeToReportParameter.Designer.cs">
       <DependentUpon>201705202255424_AddDBTypeToReportParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705220552307_AddTableStyle_TableAlignment.cs" />
+    <Compile Include="Migrations\201705220552307_AddTableStyle_TableAlignment.Designer.cs">
+      <DependentUpon>201705220552307_AddTableStyle_TableAlignment.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705202255424_AddDBTypeToReportParameter.resx">
       <DependentUpon>201705202255424_AddDBTypeToReportParameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705220552307_AddTableStyle_TableAlignment.resx">
+      <DependentUpon>201705220552307_AddTableStyle_TableAlignment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

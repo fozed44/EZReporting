@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using EZDataFramework.Framework;
 using EZReporting.Interface;
 using EZReporting.Location;
 
@@ -36,6 +38,10 @@ namespace EZReporting.Implementation {
         }
 
         public Type GetColumnType(int column) {
+            throw new NotImplementedException();
+        }
+
+        public void Load(Report report, Dictionary<string, string> @params) {
             throw new NotImplementedException();
         }
 

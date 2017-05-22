@@ -7,17 +7,19 @@ namespace EZDataFramework.Framework {
 
         [Key]
         public int    pkID         { get; set; }
-        public string ColumnName   { get; set; } 
-        public int    Flags        { get; set; }
+        public string ColumnName   { get; set; }
         public string DBType       { get; set; }
         public string Formatter    { get; set; }
         public string Converter    { get; set; }
-        public int    FormatFlags  { get; set; }
-        public int    ConvertFlags { get; set; }
+        public string Css          { get; set; }
 
         [ForeignKey("Report")]
         public int            fkReport { get; set; }
         public virtual Report Report   { get; set; }
+
+        [ForeignKey("Alignment")]
+        public int               fkAlignment { get; set; }
+        public virtual Alignment Alignment   { get; set; }
 
         public virtual List<ReportColumnCustomization> Customizations { get; set; }
     }

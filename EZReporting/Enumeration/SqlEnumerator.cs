@@ -221,8 +221,7 @@ namespace EZReporting.Enumeration {
         private static string GetOutputEnumerationQuery(string database, string schema, string proc) {
             var inputs = EnumerateStoredProcInputs(database, schema, proc);
             return $"SET FMTONLY ON; " +
-                   $"\nEXEC {database}.{schema}.{proc} {GetOutputEnumerationQueryInputs(inputs)} " +
-                   "";
+                   $"\nEXEC {database}.{schema}.{proc} {GetOutputEnumerationQueryInputs(inputs)}";
         }
 
         private static string GetOutputEnumerationQueryInputs(IEnumerable<EnumeratedInput> inputs) {
