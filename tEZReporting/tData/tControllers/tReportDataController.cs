@@ -8,6 +8,12 @@ namespace tEZReporting.tControllers {
     [TestClass]
     public class tReportDataController {
 
+        #region Fields
+
+        Report _testReport;
+
+        #endregion
+
         [ClassInitialize]
         public static void tInitialize(TestContext c) {
             ReportDataController.Delete(TestMetadata.ReportName);
@@ -21,22 +27,49 @@ namespace tEZReporting.tControllers {
 
         [TestMethod]
         public void tCreate() {
+            bool result = false;
             CreateTestReport();
-            var result = ReportDataController.Exists(TestMetadata.ReportName);
+            try {
+                result = ReportDataController.Exists(TestMetadata.ReportName);
+            } finally {
+                DeleteTestReport(_testReport);
+            }
             Assert.IsTrue(result);
-            ReportDataController.Delete(TestMetadata.ReportName);
         }
 
         #region Private
 
         private void CreateTestReport() {
-            var report = new Report {
-                DatabaseName = TestMetadata.DatabaseName,
-                SchemaName   = TestMetadata.SchemaName,
-                ProcName     = TestMetadata.ProcName,
-                ReportName   = TestMetadata.ReportName
+            var connectionString = new ConnectionString {
+                Name  = "TestConnectionStringName",
+                Value = "TestConnectionStringValue"
             };
-            ReportDataController.Create(report);
+            ConnectionStringDataController.AddConnectionString(connectionString);
+            var tableStyle = new TableStyle {
+                CellStyle      = "CellStyleCss",
+                EvenRowStyle   = "EvenRowStyleCss",
+                OddRowStyle    = "OddRowStyleCss",
+                HeaderRowStyle = "HeaderRowStyleCss",
+                HeaderStyle    = "HeaderStyleCss",
+                RowStyle       = "RowStyleCss",
+                Style          = "StyleCss"
+            };
+            TableStyleDataController.AddTableStyle(tableStyle);
+            _testReport = new Report {
+                fkTableStyle       = tableStyle.pkID,
+                fkConnectionString = connectionString.pkID,
+                DatabaseName       = TestMetadata.DatabaseName,
+                SchemaName         = TestMetadata.SchemaName,
+                ProcName           = TestMetadata.ProcName,
+                ReportName         = TestMetadata.ReportName
+            };
+            ReportDataController.Create(_testReport);
+        }
+
+        private void DeleteTestReport(Report report) {
+            ConnectionStringDataController.DeleteConnectionString(report.ConnectionString);
+            TableStyleDataController.DeleteTableStyle(report.TableStyle);
+            ReportDataController.Delete(report);
         }
 
         #endregion

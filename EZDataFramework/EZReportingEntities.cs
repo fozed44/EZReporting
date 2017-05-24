@@ -10,5 +10,7 @@ namespace EZDataFramework.Framework {
         public virtual DbSet<ReportColumn>              Columns              { get; set; }
         public virtual DbSet<ReportColumnCustomization> ColumnCustomizations { get; set; }
         public virtual DbSet<ReportParameter>           Parameters           { get; set; }
+        public virtual DbSet<ConnectionString>          ConnectionStrings    { get; set; }
+        public virtual DbSet<TableStyle>                TableStyles          { get; set; }
     }
 }

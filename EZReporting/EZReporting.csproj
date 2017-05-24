@@ -64,7 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Builders\QueryBuilder.cs" />
+    <Compile Include="Data\Controllers\ConnectionStringDataController.cs" />
     <Compile Include="Data\Controllers\ParameterDataController.cs" />
+    <Compile Include="Data\Controllers\TableStyleDataController.cs" />
     <Compile Include="ImplementationLocation\ConverterDescriptor.cs" />
     <Compile Include="ImplementationLocation\FormatterDescriptor.cs" />
     <Compile Include="ImplementationLocation\ImplementationCategory.cs" />

@@ -37,12 +37,13 @@ namespace EZReporting.Data {
         /// <param name="report">
         /// The report object filled with the report meta data.
         /// </param>
-        public static void Create(Report report) {
+        public static Report Create(Report report) {
             using(var context = new EZReportingEntities()) {
                 context.Reports.Add(report);
                 InsertDefaultInputData(context, report);
                 InsertDefaultOutputData(context, report);
                 context.SaveChanges();
+                return report;
             }
         }
 
@@ -63,6 +64,22 @@ namespace EZReporting.Data {
                 DeleteColumnData(context, current);
                 DeleteInputData(context, current);
                 context.Reports.Remove(current);
+                context.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Deletes the report. All column and parameter data is also deleted.
+        /// </summary>
+        /// <param name="report">
+        /// The report to be deleted.
+        /// </param>
+        public static void Delete(Report report) {
+            using(var context = new EZReportingEntities()) {
+                DeleteCustomColumnData(context, report);
+                DeleteColumnData(context, report);
+                DeleteInputData(context, report);
+                context.Reports.Remove(report);
                 context.SaveChanges();
             }
         }
