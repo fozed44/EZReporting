@@ -10,7 +10,7 @@ namespace EZReporting.Data {
     //+  Purpose:
     ///     Retrieve and store parameter data in EZReporting.dbo.ReportParameter.
     /// </summary>
-    public static class ParameterDataController {
+    public class ParameterDataController : DataControllerBase {
 
         /// <summary>
         /// Enumerate EZReporting.Data.ReportParameter objects for each parameter in the specified

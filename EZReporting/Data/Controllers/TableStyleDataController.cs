@@ -1,5 +1,6 @@
 ﻿using EZDataFramework.Framework;
 using System.Linq;
+using System;
 
 namespace EZReporting.Data {
 
@@ -9,7 +10,7 @@ namespace EZReporting.Data {
     //+  Public:
     ///     Data controller for table styles.
     /// </summary>
-    public static class TableStyleDataController {
+    public class TableStyleDataController : DataControllerBase {
 
         /// <summary>
         /// Load a table style from the database.

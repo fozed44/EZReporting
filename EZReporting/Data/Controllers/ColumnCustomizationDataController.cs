@@ -10,7 +10,9 @@ namespace EZReporting.Data {
     //+  Purpose:
     ///     Enumerates column customization data for each column in a particular report.
     /// </summary>
-    public static class ColumnCustomizationDataController {
+    public class ColumnCustomizationDataController : DataControllerBase {
+
+        private ColumnCustomizationDataController() { }
 
         public static List<ReportColumnCustomization> GetColumns(Report report) {
             using(var context = new EZReportingEntities()) {

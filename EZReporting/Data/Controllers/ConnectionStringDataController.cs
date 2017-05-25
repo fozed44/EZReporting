@@ -9,7 +9,7 @@ namespace EZReporting.Data {
     //+  Purpose:
     ///     Data controller for connection strings.
     /// </summary>
-    public static class ConnectionStringDataController {
+    public class ConnectionStringDataController : DataControllerBase {
 
         #region Public
 

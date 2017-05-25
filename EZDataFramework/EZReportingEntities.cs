@@ -12,5 +12,6 @@ namespace EZDataFramework.Framework {
         public virtual DbSet<ReportParameter>           Parameters           { get; set; }
         public virtual DbSet<ConnectionString>          ConnectionStrings    { get; set; }
         public virtual DbSet<TableStyle>                TableStyles          { get; set; }
+        public virtual DbSet<Alignment>                 Alignments           { get; set; }
     }
 }

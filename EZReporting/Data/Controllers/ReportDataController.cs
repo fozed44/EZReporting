@@ -11,7 +11,7 @@ namespace EZReporting.Data {
     //+  Purpose:
     ///     Methods used to CRUD report objects in EZReporting.dbo.Database
     /// </summary>
-    public static class ReportDataController {
+    public class ReportDataController : DataControllerBase {
 
         #region Public
 

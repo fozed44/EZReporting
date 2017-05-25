@@ -64,7 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Builders\QueryBuilder.cs" />
+    <Compile Include="Data\Controllers\AlignmentDataController.cs" />
     <Compile Include="Data\Controllers\ConnectionStringDataController.cs" />
+    <Compile Include="Data\Controllers\DataControllerBase.cs" />
+    <Compile Include="Data\Controllers\GlobalDataInitalizer.cs" />
     <Compile Include="Data\Controllers\ParameterDataController.cs" />
     <Compile Include="Data\Controllers\TableStyleDataController.cs" />
     <Compile Include="ImplementationLocation\ConverterDescriptor.cs" />

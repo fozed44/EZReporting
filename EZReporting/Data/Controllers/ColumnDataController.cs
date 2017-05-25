@@ -10,7 +10,7 @@ namespace EZReporting.Data {
     //+  Purpose:
     ///     Get column data for the columns in a particular report.
     /// </summary>
-    public static class ColumnDataController {
+    public class ColumnDataController : DataControllerBase {
 
         #region Public
 
