@@ -32,36 +32,40 @@ namespace EZReporting.Data {
         #region Private
 
         private static void EnsureAlignmentDataExists() {
-            var center = AlignmentDataController.GetAlignment("center");
-            var right  = AlignmentDataController.GetAlignment("right");
-            var left   = AlignmentDataController.GetAlignment("left");
+            using(var context = new EZReportingEntities()) {
 
-            if(center.Count() < 1)
-                AlignmentDataController.AddAlignment(
-                    new Alignment {
-                        Css = "text-align:center;",
-                        DisplayName = "center"
-                    }
-                );
+                var center = context.Alignments.Where(x => x.DisplayName == "center");
+                var right  = context.Alignments.Where(x => x.DisplayName == "right");
+                var left   = context.Alignments.Where(x => x.DisplayName == "left");
 
-            if(left.Count() < 1)
-                AlignmentDataController.AddAlignment(
-                    new Alignment {
-                        Css = "text-align:left;",
-                        DisplayName = "left"
-                    }
-                );
 
-            if(right.Count() < 1)
-                AlignmentDataController.AddAlignment(
-                    new Alignment {
-                        Css = "text-align:right;",
-                        DisplayName = "right"
-                    }
-                );
-        }
+                if(center.Count() < 1)
+                    context.Alignments.Add(
+                        new Alignment {
+                            Css = "text-align:center;",
+                            DisplayName = "center"
+                        }
+                    );
 
-        
+                if(left.Count() < 1)
+                    context.Alignments.Add(
+                        new Alignment {
+                            Css = "text-align:left;",
+                            DisplayName = "left"
+                        }
+                    );
+
+                if(right.Count() < 1)
+                    context.Alignments.Add(
+                        new Alignment {
+                            Css = "text-align:right;",
+                            DisplayName = "right"
+                        }
+                    );
+
+                context.SaveChanges();
+            }
+        }        
 
         #endregion
     }

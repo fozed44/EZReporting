@@ -24,12 +24,10 @@ namespace EZReporting.Data {
         /// An enumerable containing ReportColumn objects describing the meta-data for each
         /// column in the report.
         /// </returns>
-        public static IEnumerable<ReportColumn> GetColumns(Report report) {            
-            using(var context = new EZReportingEntities()) {
-                return (from column in context.Columns
-                        where column.fkReport == report.pkID
-                        select column).ToList();
-            }
+        public static IEnumerable<ReportColumn> GetColumns(Report report) {
+            return (from column in Context.Columns
+                    where column.fkReport == report.pkID
+                    select column).ToList();
         }
 
         #endregion

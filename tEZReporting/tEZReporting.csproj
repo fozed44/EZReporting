@@ -63,6 +63,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\TestMetadata.cs" />
+    <Compile Include="Helpers\TestReportCreator.cs" />
     <Compile Include="tAttributes\tImplementationEnumerator.cs" />
     <Compile Include="tData\tBuilders\tQueryBuilder.cs" />
     <Compile Include="tData\tControllers\tColumnDataController.cs" />

@@ -15,13 +15,11 @@ namespace EZReporting.Data {
         private ColumnCustomizationDataController() { }
 
         public static List<ReportColumnCustomization> GetColumns(Report report) {
-            using(var context = new EZReportingEntities()) {
-                return (from column in context.Columns
-                        join columnCustomization in context.ColumnCustomizations
-                        on column.pkID equals columnCustomization.fkReportColumn
-                        where column.fkReport == report.pkID
-                        select columnCustomization).ToList();
-            }
+            return (from column in Context.Columns
+                    join columnCustomization in Context.ColumnCustomizations
+                    on column.pkID equals columnCustomization.fkReportColumn
+                    where column.fkReport == report.pkID
+                    select columnCustomization).ToList();
         }
 
     }

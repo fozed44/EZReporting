@@ -23,11 +23,9 @@ namespace EZReporting.Data {
         /// An enumeration containing the parameter data for the specified report.
         /// </returns>
         public static List<ReportParameter> GetParameters(Report report) {
-            using(var context = new EZReportingEntities()) {
-                return (from entity in context.Parameters
-                        where entity.fkReport == report.pkID
-                        select entity).ToList();
-            }
+            return (from entity in Context.Parameters
+                    where entity.fkReport == report.pkID
+                    select entity).ToList();
         }
 
     }
