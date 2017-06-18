@@ -43,17 +43,20 @@ namespace WebServer.Controllers
         #region Helpers
 
         private EditModel GetEditModel(string reportName) {
-            var result = new EditModel();
-            var reportMetaData = ReportDataController.Get(reportName);
 
-            result.Report = reportMetaData;
-            result.Parameters          = ParameterDataController.GetParameters(reportMetaData);
-            result.OutputColumns       = ColumnDataController.GetColumns(reportMetaData);
-            result.ParameterConverters = ImplementationEnumerator.Locate(typeof(IConverter));
-            result.OutputConverters    = ImplementationEnumerator.Locate(typeof(IConverter));
-            result.Formatters          = ImplementationEnumerator.Locate(typeof(IFormatter));
+            using(var dp = new DataControllerBase.DisposerToken()) {
+                var result = new EditModel();
+                var reportMetaData = ReportDataController.Get(reportName);
 
-            return result;
+                result.Report = reportMetaData;
+                result.Parameters          = ParameterDataController.GetParameters(reportMetaData);
+                result.OutputColumns       = ColumnDataController.GetColumns(reportMetaData);
+                result.ParameterConverters = ImplementationEnumerator.Locate(typeof(IConverter));
+                result.OutputConverters    = ImplementationEnumerator.Locate(typeof(IConverter));
+                result.Formatters          = ImplementationEnumerator.Locate(typeof(IFormatter));
+
+                return result;
+            }
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using EZDataFramework.Framework;
+using EZReporting.Data;
 using EZReporting.Enumeration;
 using WebServer.Models;
 
@@ -45,12 +46,14 @@ namespace WebServer.Controllers
         public JsonResult CreateReport(string reportName, string database, string schema, string procedure) {
 
             try {
-                EZReporting.Data.ReportDataController.Create(new Report {
-                    ReportName   = reportName,
-                    DatabaseName = database,
-                    SchemaName   = schema,
-                    ProcName     = procedure
-                });
+                using(var dp = new DataControllerBase.DisposerToken()) {
+                    EZReporting.Data.ReportDataController.Create(new Report {
+                        ReportName   = reportName,
+                        DatabaseName = database,
+                        SchemaName   = schema,
+                        ProcName     = procedure
+                    });
+                }
             } catch (Exception e) {
                 return new JsonResult {
                     Data = new {
