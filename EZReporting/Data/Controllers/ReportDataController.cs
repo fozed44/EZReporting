@@ -2,6 +2,7 @@
 using System.Linq;
 using EZDataFramework.Framework;
 using EZReporting.Enumeration;
+using SimpleLogging;
 
 namespace EZReporting.Data {
 
@@ -40,6 +41,7 @@ namespace EZReporting.Data {
             InsertDefaultInputData(Context, report);
             InsertDefaultOutputData(Context, report);
             Context.SaveChanges();
+            Logger.Trace($"Created report {report.ReportName}.");
             return report;
         }
 
@@ -60,6 +62,7 @@ namespace EZReporting.Data {
             DeleteInputData(current);
             Context.Reports.Remove(current);
             Context.SaveChanges();
+            Logger.Trace($"Deleted report {reportName}.");
         }
 
         /// <summary>
@@ -75,6 +78,7 @@ namespace EZReporting.Data {
             Context.Reports.Attach(report);
             Context.Reports.Remove(report);
             Context.SaveChanges();
+            Logger.Trace($"Deleted report {report.ReportName}.");
         }
 
         /// <summary>

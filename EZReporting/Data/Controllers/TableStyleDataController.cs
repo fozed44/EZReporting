@@ -1,6 +1,7 @@
 ﻿using EZDataFramework.Framework;
 using System.Linq;
 using System;
+using SimpleLogging;
 
 namespace EZReporting.Data {
 
@@ -27,6 +28,7 @@ namespace EZReporting.Data {
         public static TableStyle AddTableStyle(TableStyle tableStyle) {
             Context.TableStyles.Add(tableStyle);
             Context.SaveChanges();
+            Logger.Trace($"Created table style {tableStyle.pkID}.");
             return tableStyle;
         }
 
@@ -37,6 +39,7 @@ namespace EZReporting.Data {
             Context.TableStyles.Attach(tableStyle);
             Context.TableStyles.Remove(tableStyle);
             Context.SaveChanges();
+            Logger.Trace($"Deleted table style {tableStyle.pkID}.");
         }
 
         /// <summary>
@@ -48,6 +51,7 @@ namespace EZReporting.Data {
                 return;
             Context.TableStyles.Remove(current);
             Context.SaveChanges();
+            Logger.Trace($"Deleted table style {pkID}.");
         }
 
     }
