@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using EZDataFramework.Framework;
 using Verification;
+using SimpleLogging;
 
 namespace EZReporting.Data {
 
@@ -22,9 +24,15 @@ namespace EZReporting.Data {
         #region Public
 
         public static void GlobalInitialize() {
-            Verify.False(_initialized, "GlobalDataInitializer::GlobalInitialize has already executed!");
-            _initialized = true;
-            EnsureAlignmentDataExists();
+            if(_initialized) {
+                Logger.Error("GlobalDataInitializer::GlobalInitialize has already executed!");
+                throw new InvalidOperationException("GlobalDataInitializer::GlobalInitialize has already executed!");
+            } else {
+                _initialized = true;
+                EnsureAlignmentDataExists();
+                Logger.InitializeDefaultFileProvider(Global.LogFilePath, Global.LogFileFilename, Global.LoggerLevel);
+                Logger.Info("GlobalDataInitializer::GlobalInitialize - Initialization complete.");
+            }
         }
 
         #endregion

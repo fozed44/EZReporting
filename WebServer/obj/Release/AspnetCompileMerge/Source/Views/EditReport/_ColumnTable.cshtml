@@ -1,20 +1,36 @@
-﻿@model IEnumerable<EZReporting.Data.ReportOutputColumn>
+﻿@model WebServer.Models.EditModel
 
 
 <div id="OutputColumnTable"class="row">
     <div class="col-xs-12">
-        <table>
+        <table id="ColumnTable">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>DBType</th>
+                    <th>Converter</th>
+                    <th>Formatter</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var column in Model) {
+                @foreach(var column in Model.OutputColumns) {
                     <tr>
                         <td>@column.ColumnName</td>
                         <td>@column.DBType</td>
+                        <td>
+                            @Html.DropDownList(
+                                "#",
+                                @Model.OutputConverters.Select(x => new SelectListItem { Text = x.Name, Value = x.Name } ),
+                                new { @class = "web-server-select"}
+                            )
+                        </td>
+                        <td>
+                            @Html.DropDownList(
+                                "#",
+                                @Model.Formatters.Select(x => new SelectListItem { Text = x.Name, Value = x.Name }),
+                                new { @class = "web-server-select" }
+                            )
+                        </td>
                     </tr>
                 }
             </tbody>

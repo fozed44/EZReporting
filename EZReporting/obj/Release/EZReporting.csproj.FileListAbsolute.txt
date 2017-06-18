@@ -10,3 +10,6 @@ C:\Projects\EZReporting\EZReporting\bin\Release\EntityFramework.SqlServer.xml
 C:\Projects\EZReporting\EZReporting\obj\Release\EZReporting.csprojResolveAssemblyReference.cache
 C:\Projects\EZReporting\EZReporting\obj\Release\EZReporting.dll
 C:\Projects\EZReporting\EZReporting\obj\Release\EZReporting.pdb
+C:\Projects\EZReporting\EZReporting\bin\Release\Common.dll
+C:\Projects\EZReporting\EZReporting\bin\Release\SimpleLogging.dll
+C:\Projects\EZReporting\EZReporting\bin\Release\Verification.dll

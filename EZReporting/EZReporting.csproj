@@ -43,8 +43,8 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleLogging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleLogging.1.0.0.0\lib\net461\SimpleLogging.dll</HintPath>
+    <Reference Include="SimpleLogging, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleLogging.1.0.0.1\lib\net452\SimpleLogging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -71,6 +71,7 @@
     <Compile Include="Data\Controllers\GlobalDataInitalizer.cs" />
     <Compile Include="Data\Controllers\ParameterDataController.cs" />
     <Compile Include="Data\Controllers\TableStyleDataController.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="ImplementationLocation\ConverterDescriptor.cs" />
     <Compile Include="ImplementationLocation\FormatterDescriptor.cs" />
     <Compile Include="ImplementationLocation\ImplementationCategory.cs" />

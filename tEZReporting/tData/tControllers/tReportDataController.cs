@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using EZDataFramework.Framework;
 using EZReporting.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,17 +20,29 @@ namespace tEZReporting.tControllers {
 
         [TestMethod]
         public void tCreate() {
-            bool result = false;
-            TestReportCreator.EnsureCreated();
             try {
+                TestReportCreator.EnsureCreated();
                 using(var disposerToken = new DataControllerBase.DisposerToken()) {
-                    result = ReportDataController.Exists(TestMetadata.ReportName);
+                    var result = ReportDataController.Exists(TestMetadata.ReportName);
+                    Assert.IsTrue(result);
                 }
             } finally {
                 TestReportCreator.EnsureRemoved();
-
             }
-            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void tGetAll() {
+            try {
+                TestReportCreator.EnsureCreated();
+                using(var dp = new DataControllerBase.DisposerToken()) {
+                    var result = ReportDataController.GetAll();
+                    Assert.IsNotNull(result);
+                    Assert.IsTrue(result.Count() > 0);
+                }
+            } finally {
+                TestReportCreator.EnsureRemoved();
+            }
         }
         
     }

@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Web.Mvc;
+using EZDataFramework.Framework;
 using EZReporting.Data;
 using WebServer.Models;
 
@@ -8,9 +11,12 @@ namespace WebServer.Controllers
     {
         // GET: Home
         public ActionResult Index(){
-            return View(new HomeModel {
-                Reports = ReportDataController.GetAll()
-            });
+            IEnumerable<Report> reports;
+
+            using(var dp = new DataControllerBase.DisposerToken())
+                reports = ReportDataController.GetAll();
+
+            return View(new HomeModel { Reports = reports });
         }
     }
 }

@@ -6,14 +6,32 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/Content/EditReport.css" type="text/css" />
+}
+
 <div id="EditReportContainer" class="row">
     <div class="col-xs-12">
         <div class="row">
             <div class="col-xs-12 text-center">
                 <h2>Editing Report</h2>
-                <h1>@Model.ReportName</h1>
+                <h1>@Model.Report.ReportName</h1>
             </div>
         </div>
+        <!-- REPORT CONTROLS -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel-primary">
+                    <div class="panel-heading">Report</div>
+                    <div class="panel-body">
+                        @{ 
+                            Html.RenderPartial("_ReportControls", Model.Report);
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- PARAMETER TABLE -->
         <div class="row">
              <div class="col-xs-12">
                  <div class="panel-primary">
@@ -26,13 +44,27 @@
                  </div>
              </div>
         </div>
+        <!-- COLUMN TABLE -->
         <div class="row">
             <div class="col-xs-12">
                 <div class="panel-primary">
                     <div class="panel-heading">Report Columns</div>
                     <div class="panel-body">
                         @{
-                            Html.RenderPartial("_ColumnTable", Model.OutputColumns);
+                            Html.RenderPartial("_ColumnTable", Model);
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- RENDERED OUTPUT -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel-primary">
+                    <div class="panel-heading">Rendering</div>
+                    <div class="panel-body">
+                        @{ 
+                            Html.RenderPartial("_ReportOutput");
                         }
                     </div>
                 </div>

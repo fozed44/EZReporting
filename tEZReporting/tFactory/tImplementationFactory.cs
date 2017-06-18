@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using EZDataFramework.Framework;
 using EZReporting.Data;
 using EZReporting.Factory;
 using EZReporting.Implementation;

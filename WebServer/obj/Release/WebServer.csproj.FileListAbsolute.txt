@@ -39,3 +39,5 @@ C:\Projects\EZReporting\WebServer\bin\System.Web.Mvc.xml
 C:\Projects\EZReporting\WebServer\obj\Release\WebServer.csprojResolveAssemblyReference.cache
 C:\Projects\EZReporting\WebServer\obj\Release\WebServer.dll
 C:\Projects\EZReporting\WebServer\obj\Release\WebServer.pdb
+C:\Projects\EZReporting\WebServer\bin\Verification.dll
+C:\Projects\EZReporting\WebServer\bin\SimpleLogging.dll
