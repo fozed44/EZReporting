@@ -24,8 +24,8 @@ namespace EZReporting.Data {
         /// </returns>
         public static bool Exists(string reportName) {
             var current = from entity in Context.Reports
-                            where entity.ReportName == reportName
-                            select entity;
+                          where entity.ReportName == reportName
+                          select entity;
             return current.Count() > 0;
         }
 
@@ -174,11 +174,11 @@ namespace EZReporting.Data {
             var columns = Context.Columns.Where(x => x.fkReport == report.pkID);
             var toDelete = new List<EZDataFramework.Framework.ReportColumnCustomization>();
             foreach(var column in columns) {
-                var customization = 
+                var customizations = 
                     Context.ColumnCustomizations.Where(x => x.fkReportColumn == column.pkID)
-                    .FirstOrDefault();
-                if(customization != null)
-                    toDelete.Add(customization);                
+                    .ToList();
+                if(customizations.Count != 0)
+                    toDelete.AddRange(customizations);
             }
             if(toDelete.Count > 0)
                 Context.ColumnCustomizations.RemoveRange(toDelete);

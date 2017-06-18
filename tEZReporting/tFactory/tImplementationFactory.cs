@@ -10,63 +10,63 @@ namespace tEZReporting.tFactory {
 
     [TestClass]
     public class tImplementationFactory {
-        
-        [ClassInitialize]
-        public static void tInitialize(TestContext c) {
-            DeleteTestReport();
-            CreateTestReport();
-        }
-
-        [ClassCleanup]
-        public static void tCleanup() {
-            DeleteTestReport();
-        }
 
         [TestMethod]
         public void tGetDataProvider() {
-            var report = ReportDataController.Get(TestMetadata.ReportName);
-            var result = ImplementationFactory.GetDataProvider(report);
-            Assert.AreEqual(typeof(DefaultDataProvider), result.GetType());
+            try {
+                TestReportCreator.EnsureCreated();
+                using(var disposerToken = new DataControllerBase.DisposerToken()) {
+                    var report = ReportDataController.Get(TestMetadata.ReportName);
+                    var result = ImplementationFactory.GetDataProvider(report);
+                    Assert.AreEqual(typeof(DefaultDataProvider), result.GetType());
+                }
+            } finally {
+                TestReportCreator.EnsureRemoved();
+            }
         }
 
         [TestMethod]
         public void tGetRenderer() {
-            var report = ReportDataController.Get(TestMetadata.ReportName);
-            var result = ImplementationFactory.GetRenderer(report);
-            Assert.AreEqual(typeof(DefaultRenderer), result.GetType());
+            try {
+                TestReportCreator.EnsureCreated();
+                using(var disposerToken = new ReportDataController.DisposerToken()) {
+                    var report = ReportDataController.Get(TestMetadata.ReportName);
+                    var result = ImplementationFactory.GetRenderer(report);
+                    Assert.AreEqual(typeof(DefaultRenderer), result.GetType());
+                }
+            } finally {
+                TestReportCreator.EnsureRemoved();
+            }
         }
 
         [TestMethod]
         public void tGetFormatter() {
-            var report = ReportDataController.Get(TestMetadata.ReportName);
-            var result = ImplementationFactory.GetFormatter(report, 0);
-            Assert.AreEqual(typeof(DefaultFormatter), result.GetType());
+            try {
+                TestReportCreator.EnsureCreated();
+                using(var disposerToken = new ReportDataController.DisposerToken()) {
+                    var report = ReportDataController.Get(TestMetadata.ReportName);
+                    var result = ImplementationFactory.GetFormatter(report, 0);
+                    Assert.AreEqual(typeof(DefaultFormatter), result.GetType()); 
+                }
+            } finally {
+                TestReportCreator.EnsureRemoved();
+            }
         }
 
         [TestMethod]
         public void tGetFormatters() {
-            var report = ReportDataController.Get(TestMetadata.ReportName);
-            var reportOutputColumns = ColumnDataController.GetColumns(report);
-            var result = ImplementationFactory.GetFormatters(report);
-            Assert.IsTrue(result.Count() == reportOutputColumns.Count());
+            try {
+                TestReportCreator.EnsureCreated();
+                using(var disposerToken = new DataControllerBase.DisposerToken()) {
+                    var report = ReportDataController.Get(TestMetadata.ReportName);
+                    var reportOutputColumns = ColumnDataController.GetColumns(report);
+                    var result = ImplementationFactory.GetFormatters(report);
+                    Assert.IsTrue(result.Count() == reportOutputColumns.Count()); 
+                }
+            } finally {
+                TestReportCreator.EnsureRemoved();
+            }
         }
-
-        #region Private
-
-        private static void CreateTestReport() {
-            ReportDataController.Create(new Report {
-                ReportName   = TestMetadata.ReportName,
-                DatabaseName = TestMetadata.DatabaseName,
-                SchemaName   = TestMetadata.SchemaName,
-                ProcName     = TestMetadata.ProcName
-            });
-        }
-
-        private static void DeleteTestReport() {
-            ReportDataController.Delete(TestMetadata.ReportName);
-        }
-
-        #endregion
 
     }
 }

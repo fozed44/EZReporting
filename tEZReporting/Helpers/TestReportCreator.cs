@@ -7,20 +7,36 @@ namespace tEZReporting.Helpers {
 
         #region Fields
 
-        private static Report _testReport;
-
+        private static Report           _testReport;
+        private static ConnectionString _connectionString;
+        private static TableStyle       _tableStyle;
         #endregion
 
         #region Public
 
-        public static Report CreateTestReport() {
+        public static void EnsureCreated() {
+            if(!TestReportExists())
+                CreateTestReport();
+        }
+
+        public static void EnsureRemoved() {
+            while(TestReportExists()) {
+                DeleteTestReport();
+            }
+        }
+
+        #endregion
+
+        #region Private
+
+        private static Report CreateTestReport() {
             using(var disposerToken = new DataControllerBase.DisposerToken()) {
-                var connectionString = new ConnectionString {
+                _connectionString = new ConnectionString {
                     Name  = "TestConnectionStringName",
                     Value = "TestConnectionStringValue"
                 };
-                ConnectionStringDataController.AddConnectionString(connectionString);
-                var tableStyle = new TableStyle {
+                ConnectionStringDataController.AddConnectionString(_connectionString);
+                _tableStyle = new TableStyle {
                     CellStyle      = "CellStyleCss",
                     EvenRowStyle   = "EvenRowStyleCss",
                     OddRowStyle    = "OddRowStyleCss",
@@ -29,10 +45,10 @@ namespace tEZReporting.Helpers {
                     RowStyle       = "RowStyleCss",
                     Style          = "StyleCss"
                 };
-                TableStyleDataController.AddTableStyle(tableStyle);
+                TableStyleDataController.AddTableStyle(_tableStyle);
                 _testReport = new Report {
-                    fkTableStyle       = tableStyle.pkID,
-                    fkConnectionString = connectionString.pkID,
+                    fkTableStyle       = _tableStyle.pkID,
+                    fkConnectionString = _connectionString.pkID,
                     DatabaseName       = TestMetadata.DatabaseName,
                     SchemaName         = TestMetadata.SchemaName,
                     ProcName           = TestMetadata.ProcName,
@@ -42,17 +58,24 @@ namespace tEZReporting.Helpers {
             }
         }
 
-        public static void DeleteTestReport() {
+        private static void ReloadTestReport() {
             using(var disposerToken = new DataControllerBase.DisposerToken()) {
-                try {
-                    ReportDataController.Delete(_testReport);
-                    ConnectionStringDataController.DeleteConnectionString(_testReport.ConnectionString);
-                    TableStyleDataController.DeleteTableStyle(_testReport.TableStyle);
-                    DataControllerBase.SaveChanges();
-                } catch(Exception e) {
-                    var x = 1;
-                    x++;
-                }
+                _testReport = ReportDataController.Get(TestMetadata.ReportName);
+            }
+        }
+
+        private static bool TestReportExists() {
+            using(var desposerToken = new DataControllerBase.DisposerToken()) {
+                return ReportDataController.Exists(TestMetadata.ReportName);
+            }
+        }
+
+        private static void DeleteTestReport() {
+            ReloadTestReport();
+            using(var disposerToken = new DataControllerBase.DisposerToken()) {
+                ReportDataController.Delete(_testReport);
+                ConnectionStringDataController.DeleteConnectionString(_connectionString);
+                TableStyleDataController.DeleteTableStyle(_tableStyle);
             }
         }
 

@@ -21,7 +21,6 @@ namespace EZDataFramework.Framework {
         public virtual List<ReportColumn>    Columns          { get; set; }
         public virtual List<ReportParameter> Parameters       { get; set; }
         public virtual ConnectionString      ConnectionString { get; set; }
-        public virtual Alignment             Alignment        { get; set; }
         public virtual TableStyle            TableStyle       { get; set; }
     }
 }

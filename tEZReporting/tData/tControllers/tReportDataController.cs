@@ -8,22 +8,9 @@ namespace tEZReporting.tControllers {
     [TestClass]
     public class tReportDataController {
 
-        #region Fields
-
-        Report _testReport;
-
-        #endregion
-
-        [ClassInitialize]
-        public static void tInitialize(TestContext c) {
-            using(var disposerToken = new DataControllerBase.DisposerToken()) {
-                ReportDataController.Delete(TestMetadata.ReportName);
-                DataControllerBase.SaveChanges();
-            }
-        }
-
         [TestMethod]
         public void tExits_FailA() {
+            TestReportCreator.EnsureRemoved();
             using(var disposerToken = new DataControllerBase.DisposerToken()) {
                 var result = ReportDataController.Exists(TestMetadata.ReportName);
                 Assert.IsFalse(result);
@@ -33,13 +20,14 @@ namespace tEZReporting.tControllers {
         [TestMethod]
         public void tCreate() {
             bool result = false;
-            TestReportCreator.CreateTestReport();
+            TestReportCreator.EnsureCreated();
             try {
                 using(var disposerToken = new DataControllerBase.DisposerToken()) {
                     result = ReportDataController.Exists(TestMetadata.ReportName);
                 }
             } finally {
-                TestReportCreator.DeleteTestReport();
+                TestReportCreator.EnsureRemoved();
+
             }
             Assert.IsTrue(result);
         }

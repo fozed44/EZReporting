@@ -71,6 +71,10 @@
     <Compile Include="Migrations\201705220552307_AddTableStyle_TableAlignment.Designer.cs">
       <DependentUpon>201705220552307_AddTableStyle_TableAlignment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706172355562_Remove_Alignment_Property_From_Report.cs" />
+    <Compile Include="Migrations\201706172355562_Remove_Alignment_Property_From_Report.Designer.cs">
+      <DependentUpon>201706172355562_Remove_Alignment_Property_From_Report.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705220552307_AddTableStyle_TableAlignment.resx">
       <DependentUpon>201705220552307_AddTableStyle_TableAlignment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706172355562_Remove_Alignment_Property_From_Report.resx">
+      <DependentUpon>201706172355562_Remove_Alignment_Property_From_Report.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
