@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using EZDataFramework.Framework;
+using SimpleLogging;
 
 namespace EZReporting.Data {
 
@@ -16,10 +18,18 @@ namespace EZReporting.Data {
         /// <summary>
         /// Retrieve a connection string from the database.
         /// </summary>
-        public static ConnectionString GetConnectionString(int id) {
+        public static ConnectionString Get(int id) {
             return (from   entity in Context.ConnectionStrings
                     where  entity.pkID == id
                     select entity).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Returns all available connection strings.
+        /// </summary>
+        public static List<ConnectionString> GetAll() {
+            return (from   entity in Context.ConnectionStrings
+                    select entity).ToList();
         }
 
         /// <summary>
@@ -28,6 +38,7 @@ namespace EZReporting.Data {
         public static ConnectionString AddConnectionString(ConnectionString connectionString) {
             Context.ConnectionStrings.Add(connectionString);
             Context.SaveChanges();
+            Logger.Trace($"Added ConnectionString {connectionString.Name}.");
             return connectionString;
         }
 
@@ -40,6 +51,7 @@ namespace EZReporting.Data {
                 return;
             Context.ConnectionStrings.Remove(current);
             Context.SaveChanges();
+            Logger.Trace($"Deleted ConnectionString {current.Name}.");
         }
 
         /// <summary>
@@ -49,6 +61,7 @@ namespace EZReporting.Data {
             Context.ConnectionStrings.Attach(connectionString);
             Context.ConnectionStrings.Remove(connectionString);
             Context.SaveChanges();
+            Logger.Trace($"Deleted ConnectionString {connectionString.Name}.");
         }
 
         #endregion

@@ -11,12 +11,20 @@ namespace WebServer.Controllers
     {
         // GET: Home
         public ActionResult Index(){
-            IEnumerable<Report> reports;
 
-            using(var dp = new DataControllerBase.DisposerToken())
-                reports = ReportDataController.GetAll();
+            using(var dp = new DataControllerBase.DisposerToken()) {
+                var reports     = ReportDataController.GetAll();
+                var conStrings  = ConnectionStringDataController.GetAll();
+                var tableStyles = TableStyleDataController.GetAll();
+                return View(
+                    new HomeModel {
+                        Reports = reports,
+                        ConnectionStrings = conStrings,
+                        TableStyles = tableStyles
+                    }
+                );
+            }
 
-            return View(new HomeModel { Reports = reports });
         }
     }
 }

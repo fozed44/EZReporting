@@ -37,6 +37,7 @@ namespace tEZReporting.Helpers {
                 };
                 ConnectionStringDataController.AddConnectionString(_connectionString);
                 _tableStyle = new TableStyle {
+                    Name           = "TestTableStyle",
                     CellStyle      = "CellStyleCss",
                     EvenRowStyle   = "EvenRowStyleCss",
                     OddRowStyle    = "OddRowStyleCss",

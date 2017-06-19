@@ -2,6 +2,7 @@
 using System.Linq;
 using System;
 using SimpleLogging;
+using System.Collections.Generic;
 
 namespace EZReporting.Data {
 
@@ -16,10 +17,18 @@ namespace EZReporting.Data {
         /// <summary>
         /// Load a table style from the database.
         /// </summary>
-        public static TableStyle LoadTableStyle(int pkID) {
-            return (from entity in Context.TableStyles
-                    where entity.pkID == pkID
+        public static TableStyle Get(int pkID) {
+            return (from   entity in Context.TableStyles
+                    where  entity.pkID == pkID
                     select entity).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Return all TableStyles.
+        /// </summary>
+        public static List<TableStyle> GetAll() {
+            return (from   entity in Context.TableStyles
+                    select entity).ToList();
         }
 
         /// <summary>
@@ -28,7 +37,7 @@ namespace EZReporting.Data {
         public static TableStyle AddTableStyle(TableStyle tableStyle) {
             Context.TableStyles.Add(tableStyle);
             Context.SaveChanges();
-            Logger.Trace($"Created table style {tableStyle.pkID}.");
+            Logger.Trace($"Created table style {tableStyle.Name}.");
             return tableStyle;
         }
 
@@ -39,7 +48,7 @@ namespace EZReporting.Data {
             Context.TableStyles.Attach(tableStyle);
             Context.TableStyles.Remove(tableStyle);
             Context.SaveChanges();
-            Logger.Trace($"Deleted table style {tableStyle.pkID}.");
+            Logger.Trace($"Deleted table style {tableStyle.Name}.");
         }
 
         /// <summary>
@@ -51,7 +60,7 @@ namespace EZReporting.Data {
                 return;
             Context.TableStyles.Remove(current);
             Context.SaveChanges();
-            Logger.Trace($"Deleted table style {pkID}.");
+            Logger.Trace($"Deleted table style {current.Name}.");
         }
 
     }

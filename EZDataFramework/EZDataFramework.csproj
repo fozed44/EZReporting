@@ -79,6 +79,10 @@
     <Compile Include="Migrations\201706190331569_Add_Table_Style_Name.Designer.cs">
       <DependentUpon>201706190331569_Add_Table_Style_Name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706190351388_Add_Required_To_Name_Columns.cs" />
+    <Compile Include="Migrations\201706190351388_Add_Required_To_Name_Columns.Designer.cs">
+      <DependentUpon>201706190351388_Add_Required_To_Name_Columns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -101,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706190331569_Add_Table_Style_Name.resx">
       <DependentUpon>201706190331569_Add_Table_Style_Name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706190351388_Add_Required_To_Name_Columns.resx">
+      <DependentUpon>201706190351388_Add_Required_To_Name_Columns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

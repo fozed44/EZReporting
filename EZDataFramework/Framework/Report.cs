@@ -6,6 +6,7 @@ namespace EZDataFramework.Framework {
     public class Report {
         [Key]
         public int    pkID         { get; set; }
+        [Required]
         public string ReportName   { get; set; }
         public string ProcName     { get; set; }
         public string SchemaName   { get; set; }

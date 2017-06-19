@@ -67,8 +67,10 @@
     <Compile Include="tAttributes\tImplementationEnumerator.cs" />
     <Compile Include="tData\tBuilders\tQueryBuilder.cs" />
     <Compile Include="tData\tControllers\tColumnDataController.cs" />
+    <Compile Include="tData\tControllers\tConnectionStringDataController.cs" />
     <Compile Include="tData\tControllers\tParameterDataController.cs" />
     <Compile Include="tData\tControllers\tReportDataController.cs" />
+    <Compile Include="tData\tControllers\tTableStyleDataController.cs" />
     <Compile Include="tEnumeration\tSqlEnumerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tFactory\tImplementationFactory.cs" />

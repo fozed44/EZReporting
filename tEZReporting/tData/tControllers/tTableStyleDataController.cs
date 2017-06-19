@@ -5,24 +5,16 @@ using tEZReporting.Helpers;
 
 namespace tEZReporting.tControllers {
     [TestClass]
-    public class tReportDataController {
+    public class tTableStyleDataController {
 
         [TestMethod]
-        public void tExits_FailA() {
-            TestReportCreator.EnsureRemoved();
-            using(var disposerToken = new DataControllerBase.DisposerToken()) {
-                var result = ReportDataController.Exists(TestMetadata.ReportName);
-                Assert.IsFalse(result);
-            }
-        }
-
-        [TestMethod]
-        public void tCreate() {
+        public void tGet() {
             try {
                 TestReportCreator.EnsureCreated();
                 using(var disposerToken = new DataControllerBase.DisposerToken()) {
-                    var result = ReportDataController.Exists(TestMetadata.ReportName);
-                    Assert.IsTrue(result);
+                    var testReport = ReportDataController.Get("TestReport");
+                    var result = TableStyleDataController.Get(testReport.TableStyle.pkID);
+                    Assert.IsNotNull(result);
                 }
             } finally {
                 TestReportCreator.EnsureRemoved();
@@ -34,7 +26,7 @@ namespace tEZReporting.tControllers {
             try {
                 TestReportCreator.EnsureCreated();
                 using(var dp = new DataControllerBase.DisposerToken()) {
-                    var result = ReportDataController.GetAll();
+                    var result = ConnectionStringDataController.GetAll();
                     Assert.IsNotNull(result);
                     Assert.IsTrue(result.Count() > 0);
                 }
@@ -42,6 +34,5 @@ namespace tEZReporting.tControllers {
                 TestReportCreator.EnsureRemoved();
             }
         }
-        
     }
 }
