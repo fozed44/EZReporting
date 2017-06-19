@@ -4,6 +4,7 @@ namespace EZDataFramework.Framework {
     public class TableStyle {
         [Key]
         public int    pkID           { get; set; }
+        public string Name           { get; set; }
         public string Style          { get; set; }
         public string HeaderRowStyle { get; set; }
         public string HeaderStyle    { get; set; }
