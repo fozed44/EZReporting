@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ConnectionStringController.cs" />
     <Compile Include="Controllers\CreateReportController.cs" />
     <Compile Include="Controllers\EditReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -151,6 +152,7 @@
     <Content Include="Views\EditReport\_ColumnCustomizationTable.cshtml" />
     <Content Include="Views\EditReport\_ReportControls.cshtml" />
     <Content Include="Views\EditReport\_ReportOutput.cshtml" />
+    <Content Include="Views\ConnectionString\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
