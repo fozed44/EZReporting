@@ -12,6 +12,8 @@
 <h2 class="text-center">EZReporting Data Helper</h2>
 <h5 class="text-center">Use the controls below to create or edit reports, connections strings, table styles, etc.</h5>
 <div class="row text-center">
+
+    <!-- Report Panel -->
     <div class="col-sm-offset-3 col-sm-6 ez-panel">
         <div class="ez-panel-head">
             Report
@@ -32,6 +34,53 @@
             </div>
         </div>
     </div>
+
+    <!-- Connection String Panel -->
+    <div class="col-sm-offset-3 col-sm-6 ez-panel">
+        <div class="ez-panel-head">
+            Connection String
+        </div>
+        <div class="ez-panel-body">
+            <a class="btn btn-default" href="~/CreateConnectionString">Create</a>
+            <span>or</span>
+            <div style="display:inline-block;width:250px;vertical-align:bottom;">
+                <div class="input-group form-inline">
+                    <select id="slctConnectionStrings" class="form-control">
+                        <option value="__NONE__">Select a Conn. String...</option>
+                        @foreach(var connectionString in Model.ConnectionStrings) {
+                            <option value="@connectionString.Name">@connectionString.Name</option>
+                        }
+                    </select>
+                    <a id="btnEditConnectionString" class="btn btn-default input-group-addon" data-target="@Url.Action("Index","ConnectionString")">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Style Panel -->
+    <div class="col-sm-offset-3 col-sm-6 ez-panel">
+        <div class="ez-panel-head">
+            Table Style
+        </div>
+        <div class="ez-panel-body">
+            <a class="btn btn-default" href="~/CreateTableStyle">Create</a>
+            <span>or</span>
+            <div style="display:inline-block;width:250px;vertical-align:bottom;">
+                <div class="input-group form-inline">
+                    <select id="slctTableStyles" class="form-control">
+                        <option value="__NONE__">Select a Table Style...</option>
+                        @foreach(var style in Model.TableStyles) {
+                            <option value="@style.Name">@style.Name</option>
+                        }
+                    </select>
+                    <a id="btnEditReportStyle" class="btn btn-default input-group-addon" data-target="@Url.Action("Index","EditReportStyle")">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 @section Scripts{
