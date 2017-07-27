@@ -69,7 +69,7 @@
 
 ﻿var dep = __webpack_require__(1);
 var vue = __webpack_require__(2);
-
+dep.
 document.write('testing');
 
 /***/ }),
