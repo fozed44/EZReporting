@@ -4,10 +4,13 @@
   "private": true,
   "devDependencies": {},
   "dependencies": {
+    "@types/jquery": "^3.2.10",
     "@types/webpack": "^3.0.5",
+    "jquery": "^3.2.1",
     "ts-loader": "^2.3.2",
     "typescript": "^2.4.2",
     "vue": "2.3.4",
+    "vue-class-component": "^5.0.2",
     "webpack": "^3.4.1"
   }
 }

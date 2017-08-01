@@ -1,0 +1,4 @@
+﻿
+interface serverResponse {
+    success: boolean;
+}
