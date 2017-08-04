@@ -20,6 +20,5 @@ new v({
     created: function () {
         c.default.ConnectionStringClient.load($('#CONNECTION_STRINGS_ENDPOINT').val());
     }
-
 });
 
