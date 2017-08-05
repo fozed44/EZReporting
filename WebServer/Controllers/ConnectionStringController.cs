@@ -25,12 +25,12 @@ namespace WebServer.Controllers
         [HttpGet]
         public JsonResult GetConnectionStrings() {
             using(var dp = new DataControllerBase.DisposerToken()) {
-                return Json(ConnectionStringDataController.GetAll());
+                return Json(ConnectionStringDataController.GetAll(), JsonRequestBehavior.AllowGet);
             }
         }
 
         [HttpPut]
-        public void AddConnectionString([Required] string name, [Required] string value) {
+        public void Create([Required] string name, [Required] string value) {
             using(var dp = new DataControllerBase.DisposerToken()) {
                 ConnectionStringDataController.AddConnectionString(
                     new ConnectionString {
@@ -42,7 +42,7 @@ namespace WebServer.Controllers
         }
 
         [HttpPost]
-        public void EditConnectionString([Required] int pkID, [Required] string name, [Required] string value) {
+        public void Update([Required] int pkID, [Required] string name, [Required] string value) {
             using(var dp = new DataControllerBase.DisposerToken()) {
                 var connectionString = ConnectionStringDataController.Get(pkID);
 
@@ -55,7 +55,7 @@ namespace WebServer.Controllers
         }
 
         [HttpPost]
-        public void DeleteConnectionString([Required] int pkID) {
+        public void Delete([Required] int pkID) {
             using(var dp = new DataControllerBase.DisposerToken()) {
                 var connectionString = ConnectionStringDataController.Get(pkID);
 

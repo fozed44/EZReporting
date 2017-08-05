@@ -2,6 +2,7 @@
 
 import 'jQuery';
 import * as cs from './ConnectionStringModels';
+import * as u from './Utilities';
 
 export class connectionStringClient {
     private _connectionStrings: Array<cs.connectionString>;
@@ -12,14 +13,25 @@ export class connectionStringClient {
         this._endpoints = endpoints;
     }
 
-    public load(endpoint: string): void {
+    public get Endpoints() {
+        var result: cs.connectionStringEndpoints;
+        result = new cs.connectionStringEndpoints();
+        result.load = this._endpoints.load;
+        result.create = this._endpoints.create;
+        result.update = this._endpoints.update;
+        result.delete = this._endpoints.delete;
+        return result;
+    }
+
+    public load(): void {
+        var _self = this;
         $.ajax({
             url: this._endpoints.load,
             method: 'GET',
             success: function (data: cs.connectionStringsServerResult) {
                 if (!data || !data.success)
                     throw new Error("Failed to receive connection string data.");
-                this._connectionStrings = data.connectionStrings;
+                _self._connectionStrings = data.connectionStrings;
             },
             error: function () {
                 throw new Error("Failed to receive connection string data.");
@@ -32,8 +44,9 @@ export class connectionStringClient {
     }
 
     public add(conString: cs.connectionString): void {
+        var _self = this;
         $.ajax({
-            url: this._endpoints.add,
+            url: this._endpoints.create,
             method: 'POST',
             data: conString,
             success: function (data: cs.serverResultBase) {
@@ -44,12 +57,13 @@ export class connectionStringClient {
                 throw new Error("Failed to add connection string!");
             },
             complete: function () {
-                this.load();
+                _self.load();
             }
         });
     }
 
     public delete(conStringId: number): void {
+        var _self = this;
         $.ajax({
             url: this._endpoints.delete,
             method: 'POST',
@@ -62,12 +76,13 @@ export class connectionStringClient {
                 throw new Error("Failed to delete connection string!");
             },
             complete: function () {
-                this.load();
+                _self.load();
             }
         });
     }
 
     public update(conString: cs.connectionString): void {
+        var _self = this;
         $.ajax({
             url: this._endpoints.update,
             method: "POST",
@@ -80,11 +95,22 @@ export class connectionStringClient {
                 throw new Error("Failed to update connection string!");
             },
             complete: function () {
-                this.load();
+                _self.load();
             }
         });
     }
 }
 
 let ConnectionStringClient: connectionStringClient = new connectionStringClient();
-export default { ConnectionStringClient };
+export { ConnectionStringClient };
+
+(() => {
+    $(function () {
+        var endpoints = ConnectionStringClient.Endpoints;
+        var message = "ConnectionStringClient: the endpoint property '{prop}' has not been set.";
+        u.Utilities.assert(endpoints.load.length>0,   message.replace('{prop}', 'load'));
+        u.Utilities.assert(endpoints.create.length>0, message.replace('{prop}', 'create'));
+        u.Utilities.assert(endpoints.delete.length>0, message.replace('{prop}', 'delete'));
+        u.Utilities.assert(endpoints.update.length>0, message.replace('{prop}', 'update'));
+    });
+})();

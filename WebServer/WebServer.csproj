@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Common\Models.ts" />
+    <TypeScriptCompile Include="Scripts\ConnectionString\src\Utilities.ts" />
     <TypeScriptCompile Include="Scripts\ConnectionString\src\ConnectionStringClient.ts" />
     <TypeScriptCompile Include="Scripts\ConnectionString\src\ConnectionStringModels.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />

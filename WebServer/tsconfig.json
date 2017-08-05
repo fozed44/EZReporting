@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators":  true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "strict": true,
+    "strictNullChecks": true,
     "lib": [
       "dom",
       "es5",
@@ -10,7 +14,7 @@
       "es2017"
     ],
     "module": "es2015",
-    "moduleResolution": "classic",
+    "moduleResolution": "node",
     "removeComments": false,
     "sourceMap": true,
     "target": "es5"

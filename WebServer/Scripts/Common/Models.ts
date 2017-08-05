@@ -1,4 +1,5 @@
 ﻿
-interface serverResponse {
+
+export interface serverResultBase {
     success: boolean;
 }

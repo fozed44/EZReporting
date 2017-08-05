@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="~/Content/EZReporting.css" type="text/css" />
 }
 
-<input id="CONNECTION_STRINGS_ENDPOINT" type="hidden" value="@Url.Action("GetConnectionStrings", "ConnectionString")" />
+<input id="CONNECTION_STRINGS_LOAD_ENDPOINT"   type="hidden" value="@Url.Action("GetConnectionStrings", "ConnectionString")" />
+<input id="CONNECTION_STRINGS_UPDATE_ENDPOINT" type="hidden" value="@Url.Action("Update", "ConnectionString")" />
+<input id="CONNECTION_STRINGS_CREATE_ENDPOINT" type="hidden" value="@Url.Action("Create", "ConnectionString")" />
+<input id="CONNECTION_STRINGS_DELETE_ENDPOINT" type="hidden" value="@Url.Action("Delete", "ConnectionString")" />
+
 
 <div id="app">
 
@@ -19,6 +23,7 @@
         </span>
     </div>
     
+    <!-- CREATE -->
     <div class="col-sm-offset-3 col-sm-6 ez-panel">
         <div class="ez-panel-head">
             Create
@@ -26,10 +31,11 @@
         <div class="ez-panel-body">
             <input id="inpCreateName" type="text" />
             <input id="inpCreateValue" type="text" />
-            <button id="btnCreate" type="button" class="btn btnDefault">Create</button>
+            <button id="btnCreate" type="button" class="btn btnDefault" v-on:click="create">Create</button>
         </div>
     </div>
     
+    <!-- EDIT -->
     <div class="col-sm-offset-3 col-sm-6 ez-panel">
         <div class="ez-panel-head">
             Edit
@@ -42,6 +48,7 @@
         </div>
     </div>
     
+    <!-- DELETE -->
     <div class="col-sm-offset-3 col-sm-6 ez-panel">
         <div class="ez-panel-head">
             Delete

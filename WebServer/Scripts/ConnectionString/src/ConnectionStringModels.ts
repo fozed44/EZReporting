@@ -8,7 +8,7 @@ export interface connectionString {
 
 export class connectionStringEndpoints {
     public load:   string;
-    public add:    string;
+    public create: string;
     public delete: string;
     public update: string;
 }

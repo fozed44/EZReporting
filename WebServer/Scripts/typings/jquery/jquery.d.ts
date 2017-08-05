@@ -894,9 +894,9 @@ interface JQueryStatic {
     /**
      * Manipulate the queue of functions to be executed on the matched element.
      *
-     * @param element A DOM element on which to add a queued function.
+     * @param element A DOM element on which to create a queued function.
      * @param queueName A string containing the name of the queue. Defaults to fx, the standard effects queue.
-     * @param callback The new function to add to the queue.
+     * @param callback The new function to create to the queue.
      */
     queue(element: Element, queueName: string, callback: Function): JQuery;
 
@@ -1104,7 +1104,7 @@ interface JQueryStatic {
      * Translate all items in an array or object to new array of items.
      * 
      * @param arrayOrObject The Array or Object to translate.
-     * @param callback The function to process each item against. The first argument to the function is the value; the second argument is the index or key of the array or object property. The function can return any value to add to the array. A returned array will be flattened into the resulting array. Within the function, this refers to the global (window) object.
+     * @param callback The function to process each item against. The first argument to the function is the value; the second argument is the index or key of the array or object property. The function can return any value to create to the array. A returned array will be flattened into the resulting array. Within the function, this refers to the global (window) object.
      */
     map(arrayOrObject: any, callback: (value?: any, indexOrKey?: any) => any): any;
 
@@ -2875,26 +2875,26 @@ interface JQuery {
     /**
      * Add elements to the set of matched elements.
      * 
-     * @param selector A string representing a selector expression to find additional elements to add to the set of matched elements.
+     * @param selector A string representing a selector expression to find additional elements to create to the set of matched elements.
      * @param context The point in the document at which the selector should begin matching; similar to the context argument of the $(selector, context) method.
      */
     add(selector: string, context?: Element): JQuery;
     /**
      * Add elements to the set of matched elements.
      * 
-     * @param elements One or more elements to add to the set of matched elements.
+     * @param elements One or more elements to create to the set of matched elements.
      */
     add(...elements: Element[]): JQuery;
     /**
      * Add elements to the set of matched elements.
      * 
-     * @param html An HTML fragment to add to the set of matched elements.
+     * @param html An HTML fragment to create to the set of matched elements.
      */
     add(html: string): JQuery;
     /**
      * Add elements to the set of matched elements.
      * 
-     * @param obj An existing jQuery object to add to the set of matched elements.
+     * @param obj An existing jQuery object to create to the set of matched elements.
      */
     add(obj: JQuery): JQuery;
 
@@ -3224,7 +3224,7 @@ interface JQuery {
     /**
      * Manipulate the queue of functions to be executed, once for each matched element.
      * 
-     * @param callback The new function to add to the queue, with a function to call that will dequeue the next item.
+     * @param callback The new function to create to the queue, with a function to call that will dequeue the next item.
      */
     queue(callback: Function): JQuery;
     /**
@@ -3238,7 +3238,7 @@ interface JQuery {
      * Manipulate the queue of functions to be executed, once for each matched element.
      * 
      * @param queueName A string containing the name of the queue. Defaults to fx, the standard effects queue.
-     * @param callback The new function to add to the queue, with a function to call that will dequeue the next item.
+     * @param callback The new function to create to the queue, with a function to call that will dequeue the next item.
      */
     queue(queueName: string, callback: Function): JQuery;
 }

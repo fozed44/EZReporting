@@ -10340,6 +10340,15 @@ var j = __webpack_require__(0);
 
 var c = __webpack_require__(5);
 
+function setEndpoints() {
+    c.ConnectionStringClient.setEndpoints({
+        load:     $('#CONNECTION_STRINGS_LOAD_ENDPOINT').val(),
+        create:   $('#CONNECTION_STRINGS_CREATE_ENDPOINT').val(),
+        update:   $('#CONNECTION_STRINGS_UPDATE_ENDPOINT').val(),
+        'delete': $('#CONNECTION_STRINGS_DELETE_ENDPOINT').val()
+    });
+}
+
 new __WEBPACK_IMPORTED_MODULE_0_Vue__["a" /* default */]({
     el: "#app",
     data: function () {
@@ -10348,11 +10357,22 @@ new __WEBPACK_IMPORTED_MODULE_0_Vue__["a" /* default */]({
         }
     },
     methods: {
+        create: function() {
+            c.ConnectionStringClient.add({
+                name: $('inpCreateName').val(),
+                value: $('inpCreateValue').val()
+            });
+        },
+        'delete': function () {
+            c.ConnectionStringClient.delete({
+
+            })
+        }
     },
     created: function () {
-        c.default.ConnectionStringClient.load($('#CONNECTION_STRINGS_ENDPOINT').val());
+        setEndpoints();
+        c.ConnectionStringClient.load($('#CONNECTION_STRINGS_ENDPOINT').val());
     }
-
 });
 
 
@@ -17725,21 +17745,43 @@ module.exports = g;
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "connectionStringClient", function() { return connectionStringClient; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConnectionStringClient", function() { return ConnectionStringClient; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jQuery__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jQuery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jQuery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ConnectionStringModels__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Utilities__ = __webpack_require__(7);
 /// <reference path="c:/Projects/EZReporting/Webserver/Scripts/typings/jQuery/jQuery.d.ts" />
+
+
 
 var connectionStringClient = (function () {
     function connectionStringClient() {
     }
-    connectionStringClient.prototype.load = function (endpoint) {
+    connectionStringClient.prototype.setEndpoints = function (endpoints) {
+        this._endpoints = endpoints;
+    };
+    Object.defineProperty(connectionStringClient.prototype, "Endpoints", {
+        get: function () {
+            var result;
+            result = new __WEBPACK_IMPORTED_MODULE_1__ConnectionStringModels__["a" /* connectionStringEndpoints */]();
+            result.load = this._endpoints.load;
+            result.create = this._endpoints.create;
+            result.update = this._endpoints.update;
+            result.delete = this._endpoints.delete;
+            return result;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    connectionStringClient.prototype.load = function () {
+        var _self = this;
         $.ajax({
-            url: endpoint,
+            url: this._endpoints.load,
             method: 'GET',
             success: function (data) {
                 if (!data || !data.success)
                     throw new Error("Failed to receive connection string data.");
-                this._connectionStrings = data.connectionStrings;
+                _self._connectionStrings = data.connectionStrings;
             },
             error: function () {
                 throw new Error("Failed to receive connection string data.");
@@ -17749,11 +17791,117 @@ var connectionStringClient = (function () {
     connectionStringClient.prototype.getConnectionStrings = function () {
         return this._connectionStrings;
     };
+    connectionStringClient.prototype.add = function (conString) {
+        var _self = this;
+        $.ajax({
+            url: this._endpoints.create,
+            method: 'POST',
+            data: conString,
+            success: function (data) {
+                if (!data || !data.success)
+                    throw new Error("Failed to add connection string!");
+            },
+            error: function () {
+                throw new Error("Failed to add connection string!");
+            },
+            complete: function () {
+                _self.load();
+            }
+        });
+    };
+    connectionStringClient.prototype.delete = function (conStringId) {
+        var _self = this;
+        $.ajax({
+            url: this._endpoints.delete,
+            method: 'POST',
+            data: conStringId,
+            success: function (data) {
+                if (!data || !data.success)
+                    throw new Error("Failed to delete connection string!");
+            },
+            error: function () {
+                throw new Error("Failed to delete connection string!");
+            },
+            complete: function () {
+                _self.load();
+            }
+        });
+    };
+    connectionStringClient.prototype.update = function (conString) {
+        var _self = this;
+        $.ajax({
+            url: this._endpoints.update,
+            method: "POST",
+            data: conString,
+            success: function (data) {
+                if (!data || !data.success)
+                    throw new Error("Failed to update connection string!");
+            },
+            error: function () {
+                throw new Error("Failed to update connection string!");
+            },
+            complete: function () {
+                _self.load();
+            }
+        });
+    };
     return connectionStringClient;
 }());
 
 var ConnectionStringClient = new connectionStringClient();
-/* harmony default export */ __webpack_exports__["default"] = ({ ConnectionStringClient: ConnectionStringClient });
+
+(function () {
+    $(function () {
+        var endpoints = ConnectionStringClient.Endpoints;
+        var message = "ConnectionStringClient: the endpoint property '{prop}' has not been set.";
+        __WEBPACK_IMPORTED_MODULE_2__Utilities__["a" /* Utilities */].assert(endpoints.load.length > 0, message.replace('{prop}', 'load'));
+        __WEBPACK_IMPORTED_MODULE_2__Utilities__["a" /* Utilities */].assert(endpoints.create.length > 0, message.replace('{prop}', 'create'));
+        __WEBPACK_IMPORTED_MODULE_2__Utilities__["a" /* Utilities */].assert(endpoints.delete.length > 0, message.replace('{prop}', 'delete'));
+        __WEBPACK_IMPORTED_MODULE_2__Utilities__["a" /* Utilities */].assert(endpoints.update.length > 0, message.replace('{prop}', 'update'));
+    });
+})();
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return connectionStringEndpoints; });
+var connectionStringEndpoints = (function () {
+    function connectionStringEndpoints() {
+    }
+    return connectionStringEndpoints;
+}());
+
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Utilities; });
+var Utilities;
+(function (Utilities) {
+    var log;
+    typeof window.console.log === 'function'
+        ? function (msg) { console.log(msg); }
+        : function (msg) { alert(msg); };
+    function assert(predicate, message) {
+        if (message === void 0) { message = ''; }
+        if (!predicate)
+            throw new Error(message || "Assertion Failed!");
+    }
+    Utilities.assert = assert;
+    function logIfNot(predicate, message) {
+        if (message === void 0) { message = ''; }
+        if (predicate)
+            return;
+        log(message || "Assertion Failed!\n" + (new Error).stack);
+    }
+    Utilities.logIfNot = logIfNot;
+})(Utilities || (Utilities = {}));
 
 
 /***/ })

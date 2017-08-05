@@ -1,6 +1,4 @@
-﻿/// <binding BeforeBuild='Run - Development' />
-
-
+/// <binding />
 var config = {
     context: __dirname + '/Scripts',
     resolve: {
