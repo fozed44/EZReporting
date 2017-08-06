@@ -23,7 +23,7 @@ export class connectionStringClient {
         return result;
     }
 
-    public load(): void {
+    public load(then: () => void = () => { }): void {
         var _self = this;
         $.ajax({
             url: this._endpoints.load,
@@ -32,6 +32,8 @@ export class connectionStringClient {
                 if (!data || !data.success)
                     throw new Error("Failed to receive connection string data.");
                 _self._connectionStrings = data.connectionStrings;
+                if (typeof then === 'function')
+                    then();
             },
             error: function () {
                 throw new Error("Failed to receive connection string data.");
@@ -43,26 +45,27 @@ export class connectionStringClient {
         return this._connectionStrings;
     }
 
-    public add(conString: cs.connectionString): void {
+    public add(conString: cs.connectionString, then: () => void = () => { }): void {
         var _self = this;
         $.ajax({
             url: this._endpoints.create,
             method: 'POST',
-            data: conString,
+            data: {
+                name: conString.name,
+                value: conString.value
+            },
             success: function (data: cs.serverResultBase) {
                 if (!data || !data.success)
                     throw new Error("Failed to add connection string!");
+                _self.load(then);
             },
             error: function () {
                 throw new Error("Failed to add connection string!");
-            },
-            complete: function () {
-                _self.load();
             }
         });
     }
 
-    public delete(conStringId: number): void {
+    public delete(conStringId: number, then: () => void = () => { }): void {
         var _self = this;
         $.ajax({
             url: this._endpoints.delete,
@@ -71,17 +74,15 @@ export class connectionStringClient {
             success: function (data: cs.serverResultBase) {
                 if (!data || !data.success)
                     throw new Error("Failed to delete connection string!");
+                _self.load(then);
             },
             error: function () {
                 throw new Error("Failed to delete connection string!");
-            },
-            complete: function () {
-                _self.load();
             }
         });
     }
 
-    public update(conString: cs.connectionString): void {
+    public update(conString: cs.connectionString, then: () => void = () => { }): void {
         var _self = this;
         $.ajax({
             url: this._endpoints.update,
@@ -90,12 +91,10 @@ export class connectionStringClient {
             success: function (data: cs.serverResultBase) {
                 if (!data || !data.success)
                     throw new Error("Failed to update connection string!");
+                _self.load(then);
             },
             error: function () {
                 throw new Error("Failed to update connection string!");
-            },
-            complete: function () {
-                _self.load();
             }
         });
     }

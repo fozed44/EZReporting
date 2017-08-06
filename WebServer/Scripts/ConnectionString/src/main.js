@@ -5,7 +5,7 @@
 
 var j = require('jQuery');
 //var v = require('vue');
-import v from 'Vue';
+import v from 'vue/dist/vue.js';
 var c = require('./ConnectionStringClient.ts');
 
 function setEndpoints() {
@@ -17,7 +17,7 @@ function setEndpoints() {
     });
 }
 
-new v({
+var _instance = new v({
     el: "#app",
     data: function () {
         return {
@@ -27,8 +27,8 @@ new v({
     methods: {
         create: function() {
             c.ConnectionStringClient.add({
-                name: $('inpCreateName').val(),
-                value: $('inpCreateValue').val()
+                name: $('#inpCreateName').val(),
+                value: $('#inpCreateValue').val()
             });
         },
         'delete': function () {
@@ -39,7 +39,11 @@ new v({
     },
     created: function () {
         setEndpoints();
-        c.ConnectionStringClient.load($('#CONNECTION_STRINGS_ENDPOINT').val());
+        c.ConnectionStringClient.load(
+            () => {
+                this.connectionStrings = c.ConnectionStringClient.getConnectionStrings();
+            }
+        );        
     }
 });
 

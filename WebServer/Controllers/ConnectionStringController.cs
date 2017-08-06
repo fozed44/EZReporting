@@ -25,12 +25,15 @@ namespace WebServer.Controllers
         [HttpGet]
         public JsonResult GetConnectionStrings() {
             using(var dp = new DataControllerBase.DisposerToken()) {
-                return Json(ConnectionStringDataController.GetAll(), JsonRequestBehavior.AllowGet);
+                return Json(new {
+                    success = true,
+                    connectionStrings = ConnectionStringDataController.GetAll()
+                }, JsonRequestBehavior.AllowGet);
             }
         }
 
-        [HttpPut]
-        public void Create([Required] string name, [Required] string value) {
+        [HttpPost]
+        public JsonResult Create([Required] string name, [Required] string value) {
             using(var dp = new DataControllerBase.DisposerToken()) {
                 ConnectionStringDataController.AddConnectionString(
                     new ConnectionString {
@@ -39,31 +42,48 @@ namespace WebServer.Controllers
                     }
                 );
             }
+            return Json(new {
+                success = true
+            });
         }
 
         [HttpPost]
-        public void Update([Required] int pkID, [Required] string name, [Required] string value) {
+        public JsonResult Update([Required] int pkID, [Required] string name, [Required] string value) {
             using(var dp = new DataControllerBase.DisposerToken()) {
                 var connectionString = ConnectionStringDataController.Get(pkID);
 
-                if(connectionString == null) return;
+                if(connectionString == null)
+                    return Json(new {
+                        success = false,
+                        message = $"Could not find connection string '{name}'"
+                    });
 
                 connectionString.Name  = name;
                 connectionString.Value = value;
                 ConnectionStringDataController.SaveChanges();
             }
+            return Json(new {
+                success = true
+            });
         }
 
         [HttpPost]
-        public void Delete([Required] int pkID) {
+        public JsonResult Delete([Required] int pkID) {
             using(var dp = new DataControllerBase.DisposerToken()) {
                 var connectionString = ConnectionStringDataController.Get(pkID);
 
-                if(connectionString == null) return;
+                if(connectionString == null)
+                    return Json(new {
+                        success = false,
+                        message = $"Could not find connection string '{pkID}'"
+                    });
 
                 ConnectionStringDataController.DeleteConnectionString(connectionString);
                 ConnectionStringDataController.SaveChanges();
             }
+            return Json(new {
+                success = true
+            });
         }
 
         #endregion
