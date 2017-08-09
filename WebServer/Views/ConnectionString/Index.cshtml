@@ -16,7 +16,7 @@
 
 
 <div id="app">
-
+    
     <div class="col-sm-offest-3 col-sm-6 pull-right">
         <span class="pull-right">
             <a href="@Url.Action("Index", "Home")">Home</a>
@@ -41,10 +41,24 @@
             Edit
         </div>
         <div class="ez-panel-body">
-            <select id="slctCreate" v-model="connectionStrings"></select>
-            <input id="inpEditName" type="text" />
-            <input id="inpEditValue" type="text" />
-            <button id="btnEdit" type="button" class="btn btnDefault">Create</button>
+            <div class="row">
+                <div class="col-xs-12">
+                    <select id="slctCreate" v-model="selectedCreate" >
+                        <option 
+                                v-for="conString in connectionStrings" 
+                                v-bind:value="conString.pkID">
+                            {{ conString.Name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <input id="inpEditName" type="text" />
+                    <input id="inpEditValue" type="text" />
+                    <button id="btnEdit" type="button" class="btn btnDefault">Create</button>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -54,10 +68,14 @@
             Delete
         </div>
         <div class="ez-panel-body">
-            <select id="slctDelete" v-model="connectionStrings"></select>
-            <input id="inpDeleteName" type="text" />
-            <input id="inpDeleteValue" type="text" />
-            <button id="btnDelete" type="button" class="btn btnDefault">Delete</button>
+            <select id="slctDelete" v-model="selectedDelete">
+                <option
+                        v-for="conString in connectionStrings"
+                        v-bind:value="conString.pkID">
+                    {{ conString.Name }}
+                </option>
+            </select>
+            <button id="btnDelete" type="button" class="btn btnDefault" v-on:click="del">Delete</button>
         </div>
     </div>
 

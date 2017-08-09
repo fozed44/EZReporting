@@ -41,8 +41,9 @@ export class connectionStringClient {
         });
     }
 
-    public getConnectionStrings(): cs.connectionString[] {
-        return this._connectionStrings;
+    public loadConnectionStrings(conStrings: cs.connectionString[]): void {
+        conStrings.length = 0;
+        this._connectionStrings.forEach((item) => conStrings.push(item));
     }
 
     public add(conString: cs.connectionString, then: () => void = () => { }): void {
@@ -51,8 +52,8 @@ export class connectionStringClient {
             url: this._endpoints.create,
             method: 'POST',
             data: {
-                name: conString.name,
-                value: conString.value
+                Name: conString.Name,
+                Value: conString.Value
             },
             success: function (data: cs.serverResultBase) {
                 if (!data || !data.success)
@@ -70,7 +71,9 @@ export class connectionStringClient {
         $.ajax({
             url: this._endpoints.delete,
             method: 'POST',
-            data: conStringId,
+            data: {
+                pkID: conStringId
+            },
             success: function (data: cs.serverResultBase) {
                 if (!data || !data.success)
                     throw new Error("Failed to delete connection string!");
@@ -87,7 +90,11 @@ export class connectionStringClient {
         $.ajax({
             url: this._endpoints.update,
             method: "POST",
-            data: conString,
+            data: {
+                pkID: conString.pkID,
+                Name: conString.Name,
+                Value: conString.Value
+            },
             success: function (data: cs.serverResultBase) {
                 if (!data || !data.success)
                     throw new Error("Failed to update connection string!");

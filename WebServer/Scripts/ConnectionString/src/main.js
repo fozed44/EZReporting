@@ -19,31 +19,49 @@ function setEndpoints() {
 
 var _instance = new v({
     el: "#app",
-    data: function () {
-        return {
-            connectionStrings: []
-        }
+    data: {
+        connectionStrings: [],
+        selectedCreate: '',
+        selectedDelete: ''
     },
     methods: {
         create: function() {
             c.ConnectionStringClient.add({
-                name: $('#inpCreateName').val(),
-                value: $('#inpCreateValue').val()
-            });
+                Name: $('#inpCreateName').val(),
+                Value: $('#inpCreateValue').val()
+            }, 
+                () => {
+                    c.ConnectionStringClient.loadConnectionStrings(this.connectionStrings);
+                }
+            );
+            $('#inpCreateName').val('');
+            $('#inpCreateValue').val('');
         },
-        'delete': function () {
+        del: function () {
+            if(!this.selectedDelete)
+                return;
+            var selectedOption = this.connectionStrings.find((item) => item.pkID === this.selectedDelete);
+            if(typeof selectedOption !== 'object')
+                return;
+            var id = selectedOption.pkID;
             c.ConnectionStringClient.delete({
-
-            })
+                pkID: id
+            },
+                () => {
+                    c.ConnectionStringClient.loadConnectionStrings(this.connectionStrings);
+                }
+            )
         }
     },
     created: function () {
         setEndpoints();
+    },
+    mounted: function () {
         c.ConnectionStringClient.load(
             () => {
-                this.connectionStrings = c.ConnectionStringClient.getConnectionStrings();
+                c.ConnectionStringClient.loadConnectionStrings(this.connectionStrings);
             }
-        );        
+        );
     }
 });
 

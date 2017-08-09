@@ -10352,31 +10352,49 @@ function setEndpoints() {
 
 var _instance = new __WEBPACK_IMPORTED_MODULE_0_vue_dist_vue_js___default.a({
     el: "#app",
-    data: function () {
-        return {
-            connectionStrings: []
-        }
+    data: {
+        connectionStrings: [],
+        selectedCreate: '',
+        selectedDelete: ''
     },
     methods: {
         create: function() {
             c.ConnectionStringClient.add({
-                name: $('#inpCreateName').val(),
-                value: $('#inpCreateValue').val()
-            });
+                Name: $('#inpCreateName').val(),
+                Value: $('#inpCreateValue').val()
+            }, 
+                () => {
+                    c.ConnectionStringClient.loadConnectionStrings(this.connectionStrings);
+                }
+            );
+            $('#inpCreateName').val('');
+            $('#inpCreateValue').val('');
         },
-        'delete': function () {
+        del: function () {
+            if(!this.selectedDelete)
+                return;
+            var selectedOption = this.connectionStrings.find((item) => item.pkID === this.selectedDelete);
+            if(typeof selectedOption !== 'object')
+                return;
+            var id = selectedOption.pkID;
             c.ConnectionStringClient.delete({
-
-            })
+                pkID: id
+            },
+                () => {
+                    c.ConnectionStringClient.loadConnectionStrings(this.connectionStrings);
+                }
+            )
         }
     },
     created: function () {
         setEndpoints();
+    },
+    mounted: function () {
         c.ConnectionStringClient.load(
             () => {
-                this.connectionStrings = c.ConnectionStringClient.getConnectionStrings();
+                c.ConnectionStringClient.loadConnectionStrings(this.connectionStrings);
             }
-        );        
+        );
     }
 });
 
@@ -20154,8 +20172,9 @@ var connectionStringClient = (function () {
             }
         });
     };
-    connectionStringClient.prototype.getConnectionStrings = function () {
-        return this._connectionStrings;
+    connectionStringClient.prototype.loadConnectionStrings = function (conStrings) {
+        conStrings.length = 0;
+        this._connectionStrings.forEach(function (item) { return conStrings.push(item); });
     };
     connectionStringClient.prototype.add = function (conString, then) {
         if (then === void 0) { then = function () { }; }
@@ -20164,8 +20183,8 @@ var connectionStringClient = (function () {
             url: this._endpoints.create,
             method: 'POST',
             data: {
-                name: conString.name,
-                value: conString.value
+                Name: conString.Name,
+                Value: conString.Value
             },
             success: function (data) {
                 if (!data || !data.success)
@@ -20183,7 +20202,9 @@ var connectionStringClient = (function () {
         $.ajax({
             url: this._endpoints.delete,
             method: 'POST',
-            data: conStringId,
+            data: {
+                pkID: conStringId
+            },
             success: function (data) {
                 if (!data || !data.success)
                     throw new Error("Failed to delete connection string!");
@@ -20200,7 +20221,11 @@ var connectionStringClient = (function () {
         $.ajax({
             url: this._endpoints.update,
             method: "POST",
-            data: conString,
+            data: {
+                pkID: conString.pkID,
+                Name: conString.Name,
+                Value: conString.Value
+            },
             success: function (data) {
                 if (!data || !data.success)
                     throw new Error("Failed to update connection string!");

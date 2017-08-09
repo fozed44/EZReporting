@@ -33,15 +33,27 @@ namespace WebServer.Controllers
         }
 
         [HttpPost]
-        public JsonResult Create([Required] string name, [Required] string value) {
+        public JsonResult Create([Required] string Name, [Required] string Value) {
+            if(string.IsNullOrEmpty(Name))
+                return Json(new {
+                    success = false,
+                    message = $"{nameof(Name)} is a required parameter."
+                });
+            if(string.IsNullOrEmpty(Value))
+                return Json(new {
+                    success = false,
+                    message = $"{nameof(Value)} is a required parameter."
+                });
+
             using(var dp = new DataControllerBase.DisposerToken()) {
                 ConnectionStringDataController.AddConnectionString(
                     new ConnectionString {
-                        Name  = name,
-                        Value = value
+                        Name  = Name,
+                        Value = Value
                     }
                 );
             }
+
             return Json(new {
                 success = true
             });

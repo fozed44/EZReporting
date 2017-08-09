@@ -1,9 +1,9 @@
 ﻿
 
 export interface connectionString {
-    id: number;
-    name: string;
-    value: string;
+    pkID: number;
+    Name: string;
+    Value: string;
 }
 
 export class connectionStringEndpoints {
